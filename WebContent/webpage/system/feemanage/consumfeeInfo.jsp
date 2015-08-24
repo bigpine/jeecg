@@ -93,8 +93,14 @@
 		     <td class="value"><input class="inputxt" id="amout" name="amout"  value="${tsConsumFeePage.amout}"> <span class="Validform_checktip"></span></td>
 
 			</tr>
-
-			<tr>
+            <tr>
+            <td align="right"><label class="Validform_label">费用类别:</label></td>
+			 <td>
+	         <t:dictSelect field="feeType" typeGroupCode="fee_type" defaultVal="${tsConsumFeePage.feeType}" hasLabel="false"></t:dictSelect>
+	        </td>
+            </tr>
+            
+			<!-- <tr>
 				<td></td>
 				<td colspan="3" class="value"><script type="text/javascript">
 					$.dialog.setting.zIndex = 1990;
@@ -120,7 +126,7 @@
 						});
 					}
 				</script></td>
-			</tr>
+			</tr> -->
 		</table>
 	</t:formvalid>
 </body>

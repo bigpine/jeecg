@@ -5,7 +5,7 @@
 <div region="center" style="padding: 1px;">
 <t:datagrid name="consumfeeList" title="耗材费用管理1" actionUrl="tsconsumfeeController.do?datagrid" fitColumns="true" checkbox="true" idField="id" fit="true" queryMode="group">
 	<t:dgCol title="主键" field="id" hidden="true"></t:dgCol>
-	<t:dgCol title="发生日期" field="markDate" formatter="yyyy-MM-dd" queryMode="group"></t:dgCol>
+	<t:dgCol title="发生日期" field="markDate" formatter="yyyy-MM-dd" query="true" queryMode="group"></t:dgCol>
 	<t:dgCol title="科目" field="itemName" query="true" dictionary ="subject"></t:dgCol>
 	<t:dgCol title="明细" field="itemDetail"></t:dgCol>
 	<t:dgCol title="规格" field="standard" ></t:dgCol>
@@ -39,6 +39,12 @@ function ExportXls() {
 	JeecgExcelExport("tsconsumfeeController.do?exportXls","consumfeeList");
 }
 
+$(document).ready(function(){
+	$("input[name='markDate_begin']").attr("class","Wdate").attr("style","height:20px;width:90px;").click(function(){WdatePicker({dateFmt:'yyyy-MM-dd'});});
+	$("input[name='markDate_end']").attr("class","Wdate").attr("style","height:20px;width:90px;").click(function(){WdatePicker({dateFmt:'yyyy-MM-dd'});});
 
+	/* $("input[name='markDate_begin']").arrt("class","easyui-datebox");
+	$("input[name='markDate_end']").arrt("class","easyui-datebox"); */
+});
 
 </script>

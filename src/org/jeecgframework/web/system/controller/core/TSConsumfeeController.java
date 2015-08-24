@@ -1,6 +1,8 @@
 package org.jeecgframework.web.system.controller.core;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -61,7 +63,7 @@ public class TSConsumfeeController extends BaseController {
 		this.message = message;
 	}
 
-	// 配送信息管理列表页面跳转
+	// 耗材信息管理列表页面跳转
 	@RequestMapping(params = "tsconsumfee")
 	public ModelAndView tConsumFee(HttpServletRequest request) {
 		return new ModelAndView("system/feemanage/consumfeeList");
@@ -77,6 +79,17 @@ public class TSConsumfeeController extends BaseController {
 		// 查询条件组装器
 		org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq,
 				tsConsumFee, request.getParameterMap());
+		String markDateStart=request.getParameter("markDate_begin");
+		String markDateEnd = request.getParameter("markDate_end");
+		if(StringUtil.isNotEmpty(markDateStart)&&StringUtil.isNotEmpty(markDateEnd)){
+			try{
+				cq.ge("markDate", new SimpleDateFormat("yyyy-MM-dd").parse(markDateStart));
+				cq.le("markDate", new SimpleDateFormat("yyyy-MM-dd").parse(markDateEnd));
+			}catch(ParseException e){
+				e.printStackTrace();
+			}
+		}
+		
 		cq.add();
 		this.systemService.getDataGridReturn(cq, true);
 

@@ -1,6 +1,7 @@
 package org.jeecgframework.web.system.pojo.base;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.jeecgframework.core.common.model.json.DataGrid;
 import org.jeecgframework.poi.excel.annotation.Excel;
 @Entity
 @Table(name = "t_s_consumfee", schema = "")
@@ -57,6 +59,8 @@ public class TSConsumfeeEntity implements Serializable {
 	/**供应商*/
 	@Excel(name="供应商")
 	private java.lang.String supplier;
+	
+	/*List<TSConsumfeeEntity> moneyCount = datagrid.getResults();*/
 	
 	private TSFeeManageEntity feeManage;
 	/**费用类型*/
@@ -273,7 +277,7 @@ public class TSConsumfeeEntity implements Serializable {
 	 *方法: 取得java.math.BigDecimal
 	 *@return: java.math.BigDecimal  总额
 	 */
-	@Column(name ="AMOUT",nullable=true,scale=2,length=10)
+	//@Column(name ="AMOUT",nullable=true,scale=2,length=10)
 	public java.math.BigDecimal getAmout(){
 		return this.amout;
 	}
