@@ -91,6 +91,9 @@ public class TSVechicleFeeEntity implements Serializable {
 	/**费用基础ID*/
 	/*@Excel(name="费用基础ID")
 	private java.lang.String feeId;*/
+	@Excel(name="费用类别")
+	/**费用类别*/
+	private String feeType;
 	
 	private TSFeeManageEntity feeManage;
 	/**
@@ -521,4 +524,13 @@ public class TSVechicleFeeEntity implements Serializable {
 	public void setFeeManage(TSFeeManageEntity feeManage) {
 		this.feeManage = feeManage;
 	}
+	@Column(name ="FEE_TYPE",nullable=true,length=50)
+	public String getFeeType() {
+		return feeType;
+	}
+
+	public void setFeeType(String feeType) {
+		this.feeType = feeType;
+	}
+	
 }

@@ -50,8 +50,9 @@ public class TSBaseFeeEntity implements Serializable {
 	private java.math.BigDecimal amout;
 	
 	private TSFeeManageEntity feeManage;
-	
-	
+	/**费用类型*/
+	@Excel(name="费用类型")
+	private String feeType;
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  主键
@@ -256,6 +257,12 @@ public class TSBaseFeeEntity implements Serializable {
 	public void setFeeManage(TSFeeManageEntity feeManage) {
 		this.feeManage = feeManage;
 	}
-	
-	
+	@Column(name ="FEE_TYPE",nullable=true,length=50)
+	public String getFeeType() {
+		return feeType;
+	}
+
+	public void setFeeType(String feeType) {
+		this.feeType = feeType;
+	}
 }

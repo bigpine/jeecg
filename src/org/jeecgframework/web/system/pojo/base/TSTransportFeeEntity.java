@@ -16,7 +16,7 @@ import org.jeecgframework.poi.excel.annotation.Excel;
 @Entity
 @Table(name = "t_s_transportfee", schema = "")
 @SuppressWarnings("serial")
-//CRM耗材费用管理 by tony
+//CRM运输费用管理 by tony
 public class TSTransportFeeEntity implements Serializable {
 
 	
@@ -84,6 +84,12 @@ public class TSTransportFeeEntity implements Serializable {
 	/**备注*/
 	@Excel(name="备注")
 	private java.lang.String carriageDesc;
+	
+	/**费用类型*/
+	@Excel(name="费用类型")
+	private java.lang.String feeType;
+	
+	
 	
 	private TSFeeManageEntity feeManage;
 	/**
@@ -431,7 +437,7 @@ public class TSTransportFeeEntity implements Serializable {
 	 */
 	@Column(name ="ARR_DATE",nullable=true,length=20)
 	public java.util.Date getArrDate(){
-		return this.sendDate;
+		return this.arrDate;
 	}
 	
 	/**
@@ -483,4 +489,14 @@ public class TSTransportFeeEntity implements Serializable {
 	public void setFeeManage(TSFeeManageEntity feeManage) {
 		this.feeManage = feeManage;
 	}
+	@Column(name ="FEE_TYPE",nullable=true,length=50)
+	public java.lang.String getFeeType() {
+		return feeType;
+	}
+
+	public void setFeeType(java.lang.String feeType) {
+		this.feeType = feeType;
+	}
+	
+	
 }
