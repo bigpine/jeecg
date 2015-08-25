@@ -4120,6 +4120,7 @@ public class RepairServiceImpl extends CommonServiceImpl implements
 		matterBom.setTSFunction(commondemo);
 		matterBom.setTSIcon(defaultIcon);
 		commonDao.saveOrUpdate(matterBom);
+		//增加报表fineReport
 		TSFunction reportdemo = new TSFunction();
 		reportdemo.setFunctionName("报表示例");
 		reportdemo.setFunctionUrl("reportDemoController.do?studentStatisticTabs&isIframe");
@@ -4137,6 +4138,7 @@ public class RepairServiceImpl extends CommonServiceImpl implements
 		ckfinder.setTSFunction(commondemo);
 		ckfinder.setTSIcon(defaultIcon);
 		commonDao.saveOrUpdate(ckfinder);
+		
 	}
 
 	/**

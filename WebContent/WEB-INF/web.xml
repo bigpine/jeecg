@@ -164,6 +164,19 @@
         <url-pattern>/randCodeImage</url-pattern>
     </servlet-mapping>
     <!--update-end-Author:zhangguoming  Date:20140226 for：添加验证码-->
+    
+    <!-- 增加fineReport报表功能 -->
+    
+   <!--  <servlet>   
+    <servlet-name>ReportServer</servlet-name>   
+    <servlet-class>com.fr.web.ReportServlet</servlet-class>   
+    <load-on-startup>0</load-on-startup>   
+    </servlet>   
+    <servlet-mapping>   
+    <servlet-name>ReportServer</servlet-name>   
+    <url-pattern>/ReportServer</url-pattern>   
+    </servlet-mapping>   -->
+ <!-- 增加fineReport报表功能 -->
 
 	<filter>
 		<filter-name>FileUploadFilter</filter-name>
