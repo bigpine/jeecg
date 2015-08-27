@@ -49,10 +49,10 @@ public class TSBaseFeeEntity implements Serializable {
 	@Excel(name="金额")
 	private java.math.BigDecimal amout;
 	
-	private TSFeeManageEntity feeManage;
+	//private TSFeeManageEntity feeManage;
 	/**费用类型*/
-	@Excel(name="费用类型")
-	private String feeType;
+	/*@Excel(name="费用类型")
+	private String feeType;*/
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  主键
@@ -248,7 +248,7 @@ public class TSBaseFeeEntity implements Serializable {
 	public void setAmout(java.math.BigDecimal amout){
 		this.amout = amout;
 	}
-	@ManyToOne(fetch = FetchType.LAZY)
+	/*@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "fee_id")
 	public TSFeeManageEntity getFeeManage() {
 		return feeManage;
@@ -264,5 +264,5 @@ public class TSBaseFeeEntity implements Serializable {
 
 	public void setFeeType(String feeType) {
 		this.feeType = feeType;
-	}
+	}*/
 }

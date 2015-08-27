@@ -5,7 +5,7 @@
 <div region="center" style="padding: 1px;">
 <t:datagrid name="vechiclefeeList" title="车辆费用管理" actionUrl="tsvechiclefeeController.do?datagrid" fitColumns="true" checkbox="true" idField="id" fit="true" queryMode="group">
 	<t:dgCol title="主键" field="id" hidden="true"></t:dgCol>
-	<t:dgCol title="发车日期" field="sendDate" formatter="yyyy-MM-dd" queryMode="group"></t:dgCol>
+	<t:dgCol title="发车日期" field="sendDate" formatter="yyyy-MM-dd"  query="true" queryMode="group"></t:dgCol>
 	<t:dgCol title="车牌" field="carCode" query="true" dictionary ="car_code"></t:dgCol>
 	<t:dgCol title="当天公里数" field="dayKm"></t:dgCol>
 	<t:dgCol title="下班公里数" field="outKm" ></t:dgCol>
@@ -44,6 +44,10 @@ function ExportXls() {
 	JeecgExcelExport("tsvechiclefeeController.do?exportXls","vechiclefeeList");
 }
 
+$(document).ready(function(){
+	$("input[name='sendDate_begin']").attr("class","Wdate").attr("style","height:20px;width:90px;").click(function(){WdatePicker({dateFmt:'yyyy-MM-dd'});});
+	$("input[name='sendDate_end']").attr("class","Wdate").attr("style","height:20px;width:90px;").click(function(){WdatePicker({dateFmt:'yyyy-MM-dd'});});
+});
 
 
 </script>

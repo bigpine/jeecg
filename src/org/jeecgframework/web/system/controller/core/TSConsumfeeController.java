@@ -48,11 +48,9 @@ import org.springframework.web.servlet.ModelAndView;
 // 耗材费用管理controller
 public class TSConsumfeeController extends BaseController {
 	
-	//用户浏览器统计分析的国际化KEY
-    private static final String USER_BROWSER_ANALYSIS = "test报表数据";
 
-	private static final Logger logger = Logger
-			.getLogger(TSConsumfeeController.class);
+	private static final Logger logger = Logger.getLogger(TSConsumfeeController.class);
+			
 
 	@Autowired
 	private TSConsumfeeServiceI tsconsumfeeService;
@@ -98,7 +96,9 @@ public class TSConsumfeeController extends BaseController {
 		
 		cq.add();
 		this.systemService.getDataGridReturn(cq, true);
-
+		String amoutCount =
+			String.valueOf(tsconsumfeeService.findOneForJdbc("select sum(amout)as tt from t_s_consumfee").get("tt"));
+        dataGrid.setFooter("amout:"+amoutCount+"合计");
 		TagUtil.datagrid(response, dataGrid);
 	}
 
@@ -257,73 +257,4 @@ public class TSConsumfeeController extends BaseController {
 		}
 		return j;
 	}
-	/**
-	 * 统计集合页面
-	 * 
-	 * @return
-	 */
-	/*@RequestMapping(params = "statisticTabs11")
-	public ModelAndView statisticTabs(HttpServletRequest request) {
-		return new ModelAndView("system/feemanage/statisticTabs");
-	}*/
-	/**
-	 *耗材数据统计
-	 * 
-	 * @return
-	 */
-/*	@RequestMapping(params = "consumCount")
-	public ModelAndView userBroswer(String reportType, HttpServletRequest request) {
-		request.setAttribute("reportType", reportType);
-		if("pie".equals(reportType)){
-			return new ModelAndView("system/feemanage/consumCountPie");
-		}else if("line".equals(reportType)) {
-			return new ModelAndView("system/feemanage/consumCountLine");
-		}
-		return new ModelAndView("system/feemanage/consumCount");
-	}*/
-
-	/**
-	 * 报表数据生成
-	 * 
-	 * @return
-	 */
-	/*@RequestMapping(params = "getBroswerBar")
-	@ResponseBody
-	public List<Highchart> getBroswerBar(HttpServletRequest request,String reportType, HttpServletResponse response) {
-		List<Highchart> list = new ArrayList<Highchart>();
-		Highchart hc = new Highchart();
-		StringBuffer sb = new StringBuffer();
-		
-		
-		sb.append("select  itemName ,COUNT(itemNum)  from TSConsumfee  GROUP BY itemName;");
-		//sb.append("SELECT broswer ,count(broswer) FROM TSLog group by broswer");
-		//List userBroswerList = systemService.findByQueryString(sb.toString());
-		List consumCountList = systemService.findByQueryString(sb.toString());
-		Long count = systemService.getCountForJdbc("SELECT COUNT(1) FROM t_s_consumfee WHERE 1=1");
-		List lt = new ArrayList();
-		hc = new Highchart();
-		hc.setName(MutiLangUtil.getMutiLangInstance().getLang(USER_BROWSER_ANALYSIS));
-		hc.setType(reportType);
-		Map<String, Object> map;
-		if (consumCountList.size() > 0) {
-			for (Object object : consumCountList) {
-				map = new HashMap<String, Object>();
-				Object[] obj = (Object[]) object;
-				map.put("name", obj[0]);
-				map.put("y", obj[1]);
-				Long groupCount = (Long) obj[1];
-				Double  percentage = 0.0;
-				if (count != null && count.intValue() != 0) {
-					percentage = new Double(groupCount)/count;
-				}
-				map.put("percentage", percentage*100);
-				lt.add(map);
-			}
-		}
-		hc.setData(lt);
-		list.add(hc);
-		return list;
-	}*/
-	
-	
 }

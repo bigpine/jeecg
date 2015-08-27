@@ -91,11 +91,11 @@ public class TSVechicleFeeEntity implements Serializable {
 	/**费用基础ID*/
 	/*@Excel(name="费用基础ID")
 	private java.lang.String feeId;*/
-	@Excel(name="费用类别")
+/*	@Excel(name="费用类别")*/
 	/**费用类别*/
-	private String feeType;
+	/*private String feeType;
 	
-	private TSFeeManageEntity feeManage;
+	private TSFeeManageEntity feeManage;*/
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  主键
@@ -515,7 +515,7 @@ public class TSVechicleFeeEntity implements Serializable {
 	public void setFeeId(java.lang.String feeId){
 		this.feeId = feeId;
 	}*/
-	@ManyToOne(fetch = FetchType.LAZY)
+/*	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "fee_id")
 	public TSFeeManageEntity getFeeManage() {
 		return feeManage;
@@ -532,5 +532,5 @@ public class TSVechicleFeeEntity implements Serializable {
 	public void setFeeType(String feeType) {
 		this.feeType = feeType;
 	}
-	
+	*/
 }

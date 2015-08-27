@@ -7,7 +7,7 @@
 	<t:dgCol title="主键" field="id" hidden="true"></t:dgCol>
 	<t:dgCol title="费用项目" field="feeName" query="true" dictionary ="fee_item"></t:dgCol>
 	<t:dgCol title="楼层" field="floor"></t:dgCol>
-	<t:dgCol title="发生日期" field="markDate" formatter="yyyy-MM-dd" queryMode="group"></t:dgCol>
+	<t:dgCol title="发生日期" field="markDate" formatter="yyyy-MM-dd" query="true" queryMode="group"></t:dgCol>
 	<t:dgCol title="费用金额" field="amout" ></t:dgCol>
 	<t:dgCol title="创建人" field="createName"></t:dgCol>
 	<t:dgCol title="创建时间" field="createDate" formatter="yyyy-MM-dd hh:mm:ss" ></t:dgCol>
@@ -36,7 +36,10 @@ function ImportXls() {
 function ExportXls() {
 	JeecgExcelExport("tsbasefeeController.do?exportXls","basefeeList");
 }
-
+$(document).ready(function(){
+	$("input[name='markDate_begin']").attr("class","Wdate").attr("style","height:20px;width:90px;").click(function(){WdatePicker({dateFmt:'yyyy-MM-dd'});});
+	$("input[name='markDate_end']").attr("class","Wdate").attr("style","height:20px;width:90px;").click(function(){WdatePicker({dateFmt:'yyyy-MM-dd'});});
+});
 
 
 </script>

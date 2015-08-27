@@ -12,6 +12,14 @@
 		if (location.href.indexOf("load=detail") != -1) {
 			$(".jeecgDetail").hide();
 		}
+		
+		
+		//$('#amout').val($('#price').val() * $('#itemNum').val() );
+		
+		$('#price, #itemNum').live('keyup', function(){
+			$('#amout').val($('#price').val() * $('#itemNum').val() );
+		});
+		
 	});
 
 	function close() {
@@ -137,16 +145,9 @@
 				value="<fmt:formatDate value='${tsConsumFeePage.markDate}' type="date" pattern="yyyy-MM-dd"/>"> <span class="Validform_checktip"></span></td>
 
 			 <td align="right"><label class="Validform_label"> 金额: </label></td>
-		     <td class="value"><input class="inputxt" id="amout" name="amout"  value="${tsConsumFeePage.amout}"> <span class="Validform_checktip"></span></td>
+		     <td class="value"><input class="inputxt" id="amout" name="amout" readonly="readonly" value="${tsConsumFeePage.amout}"> <span class="Validform_checktip"></span></td>
 
 			</tr>
-            <tr>
-            <td align="right"><label class="Validform_label">费用类别:</label></td>
-			 <td>
-	         <t:dictSelect field="feeType" typeGroupCode="fee_type" defaultVal="${tsConsumFeePage.feeType}" hasLabel="false"></t:dictSelect>
-	        </td>
-            </tr>
-            
 			<!-- <tr>
 				<td></td>
 				<td colspan="3" class="value"><script type="text/javascript">

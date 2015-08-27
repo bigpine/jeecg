@@ -12,18 +12,12 @@
 		if (location.href.indexOf("load=detail") != -1) {
 			$(".jeecgDetail").hide();
 		}
+		$('#sendNum, #price').live('keyup', function(){
+			$('#amout').val($('#price').val() * $('#sendNum').val() );
+		});
 	});
 
-	/* 	function uploadFile(data){
-			$("#projectId").val(data.obj.id);
-			if($(".uploadify-queue-item").length>0){
-				upload();
-			}else{
-				frameElement.api.opener.reloadTable();
-				frameElement.api.close();
-			}
-		}
-	 */
+
 	function close() {
 		frameElement.api.close();
 	}
@@ -90,7 +84,7 @@
 	         <t:dictSelect field="payType" typeGroupCode="pay_type" defaultVal="${tsTransportPage.payType}" hasLabel="false"></t:dictSelect>
 	        </td>
 			 <td align="right"><label class="Validform_label"> 单价: </label></td>
-		     <td class="value"><input class="inputxt" id="price" name="price"  value="${tsTransportPage.price}"> <span class="Validform_checktip"></span></td>
+		     <td class="value"><input class="inputxt" id="price" name="price"  value="${tsTransportPage.price}">元<span class="Validform_checktip"></span></td>
 
 			</tr>
 			<tr>
@@ -98,7 +92,7 @@
 		     <td class="value"><input class="inputxt" id="sendNum" name="sendNum"  value="${tsTransportPage.sendNum}"> <span class="Validform_checktip"></span></td>
 
 			 <td align="right"><label class="Validform_label"> 金额: </label></td>
-		     <td class="value"><input class="inputxt" id="amout" name="amout"  value="${tsTransportPage.amout}"> <span class="Validform_checktip"></span></td>
+		     <td class="value"><input class="inputxt" id="amout" name="amout" readonly="readonly" value="${tsTransportPage.amout}">元<span class="Validform_checktip"></span></td>
 
 		     </tr>
 		     <tr>
@@ -112,46 +106,23 @@
 			 <tr>
             
 			 <td align="right"><label class="Validform_label"> 体积: </label></td>
-		     <td class="value"><input class="inputxt" id="volume" name="volume"  value="${tsTransportPage.volume}"> <span class="Validform_checktip"></span></td>
+		     <td class="value"><input class="inputxt" id="volume" name="volume"  value="${tsTransportPage.volume}">M3 <span class="Validform_checktip"></span></td>
 			 <td align="right"><label class="Validform_label"> 重量: </label></td>
-		     <td class="value"><input class="inputxt" id="weight" name="weight"  value="${tsTransportPage.weight}"> <span class="Validform_checktip"></span></td>
+		     <td class="value"><input class="inputxt" id="weight" name="weight"  value="${tsTransportPage.weight}">KG <span class="Validform_checktip"></span></td>
 
 			</tr>
-	        <tr>
-	         <td align="right"><label class="Validform_label">承运商: </label></td>
+			<tr>
+			<td align="right"><label class="Validform_label">承运商: </label></td>
 		     <td class="value"><input class="inputxt" id="carrier" name="carrier"  value="${tsTransportPage.carrier}"> <span class="Validform_checktip"></span></td>
 	        
+			</tr>
+	        <tr>
+	         
 				<td align="right"><label class="Validform_label"> 备注:
 				</label></td>
 				<td class="value"><textarea name="carriageDesc" id="carriageDesc" style="width:300px;height:300px;">${tsTransportPage.carriageDesc}</textarea></td>
 		   </tr>
-			<tr>
-				<td></td>
-				<td colspan="3" class="value"><script type="text/javascript">
-					$.dialog.setting.zIndex = 1990;
-					function del(url, obj) {
-						$.dialog.confirm("确认删除该条记录?", function() {
-							$.ajax({
-								async : false,
-								cache : false,
-								type : 'POST',
-								url : url,// 请求的action路径
-								error : function() {// 请求失败处理函数
-								},
-								success : function(data) {
-									var d = $.parseJSON(data);
-									if (d.success) {
-										var msg = d.msg;
-										tip(msg);
-										$(obj).closest("tr").hide("slow");
-									}
-								}
-							});
-						}, function() {
-						});
-					}
-				</script></td>
-			</tr>
+			
 		</table>
 	</t:formvalid>
 </body>

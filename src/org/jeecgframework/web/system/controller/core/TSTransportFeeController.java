@@ -1,6 +1,8 @@
 package org.jeecgframework.web.system.controller.core;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -75,6 +77,16 @@ public class TSTransportFeeController extends BaseController {
 		// 查询条件组装器
 		org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq,
 				tsTransport, request.getParameterMap());
+		String sendDateStart=request.getParameter("sendDate_begin");
+		String sendDateEnd = request.getParameter("sendDate_end");
+		if(StringUtil.isNotEmpty(sendDateStart)&&StringUtil.isNotEmpty(sendDateEnd)){
+			try{
+				cq.ge("sendDate", new SimpleDateFormat("yyyy-MM-dd").parse(sendDateStart));
+				cq.le("sendDate", new SimpleDateFormat("yyyy-MM-dd").parse(sendDateEnd));
+			}catch(ParseException e){
+				e.printStackTrace();
+			}
+		}
 		cq.add();
 		this.systemService.getDataGridReturn(cq, true);
 

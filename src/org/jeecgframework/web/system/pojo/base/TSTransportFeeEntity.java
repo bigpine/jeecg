@@ -86,12 +86,12 @@ public class TSTransportFeeEntity implements Serializable {
 	private java.lang.String carriageDesc;
 	
 	/**费用类型*/
-	@Excel(name="费用类型")
+	/*@Excel(name="费用类型")
 	private java.lang.String feeType;
+	*/
 	
 	
-	
-	private TSFeeManageEntity feeManage;
+	/*private TSFeeManageEntity feeManage;*/
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  主键
@@ -480,7 +480,7 @@ public class TSTransportFeeEntity implements Serializable {
 		this.carriageDesc = carriageDesc;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	/*@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "fee_id")
 	public TSFeeManageEntity getFeeManage() {
 		return feeManage;
@@ -497,6 +497,6 @@ public class TSTransportFeeEntity implements Serializable {
 	public void setFeeType(java.lang.String feeType) {
 		this.feeType = feeType;
 	}
-	
+	*/
 	
 }

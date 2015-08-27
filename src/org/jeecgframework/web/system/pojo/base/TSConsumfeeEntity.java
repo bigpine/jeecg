@@ -62,10 +62,10 @@ public class TSConsumfeeEntity implements Serializable {
 	
 	/*List<TSConsumfeeEntity> moneyCount = datagrid.getResults();*/
 	
-	private TSFeeManageEntity feeManage;
+	//private TSFeeManageEntity feeManage;
 	/**费用类型*/
-	@Excel(name="费用类型")
-	private String feeType;
+	/*@Excel(name="费用类型")
+	private String feeType;*/
 	/**费用基础ID*/
 	/*@Excel(name="费用基础ID")
 	private java.lang.String feeId;*/
@@ -322,7 +322,7 @@ public class TSConsumfeeEntity implements Serializable {
 		this.feeId = feeId;
 	}
 */
-	@ManyToOne(fetch = FetchType.LAZY)
+/*	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "fee_id")
 	public TSFeeManageEntity getFeeManage() {
 		return feeManage;
@@ -339,6 +339,6 @@ public class TSConsumfeeEntity implements Serializable {
 	public void setFeeType(String feeType) {
 		this.feeType = feeType;
 	}
-	
+	*/
 	
 }

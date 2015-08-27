@@ -12,6 +12,9 @@
 		if (location.href.indexOf("load=detail") != -1) {
 			$(".jeecgDetail").hide();
 		}
+		$('#startKm, #endKm').live('keyup', function(){
+			$('#dayKm').val($('#endKm').val() - $('#startKm').val() );
+		});
 	});
 
 	/* 	function uploadFile(data){
@@ -69,10 +72,13 @@
 		</tr>
 		<tr>
              <td align="right"><label class="Validform_label">驾驶员: </label></td>
-		     <td class="value"><input class="inputxt" id="driver" name="driver"  value="${tsVechicleFeePage.driver}"> <span class="Validform_checktip"></span></td>
-
+		    <%--  <td class="value"><input class="inputxt" id="driver" name="driver"  value="${tsVechicleFeePage.driver}"> <span class="Validform_checktip"></span></td>
+ --%>
+             <td>
+	         <t:dictSelect field="driver" typeGroupCode="t_driver" defaultVal="${tsVechicleFeePage.driver}" hasLabel="false"></t:dictSelect>
+	        </td>
 			 <td align="right"><label class="Validform_label"> 当天公里数: </label></td>
-		     <td class="value"><input class="inputxt" id="dayKm" name="dayKm"  value="${tsVechicleFeePage.dayKm}"> <span class="Validform_checktip"></span></td>
+		     <td class="value"><input class="inputxt" id="dayKm" name="dayKm"  value="${tsVechicleFeePage.dayKm}" readonly="readonly"> <span class="Validform_checktip"></span></td>
 
 			</tr>
            <tr>
@@ -132,7 +138,7 @@
 				</label></td>
 				<td class="value"><textarea name="serviceDetail" id="serviceDetail" style="width:300px;height:300px;">${tsVechicleFeePage.serviceDetail}</textarea></td>
 		   </tr>
-			<tr>
+			<!-- <tr>
 				<td></td>
 				<td colspan="3" class="value"><script type="text/javascript">
 					$.dialog.setting.zIndex = 1990;
@@ -158,7 +164,7 @@
 						});
 					}
 				</script></td>
-			</tr>
+			</tr> -->
 		</table>
 	</t:formvalid>
 </body>
