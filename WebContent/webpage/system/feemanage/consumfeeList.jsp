@@ -5,13 +5,13 @@
 <div region="center" style="padding: 1px;">
 <t:datagrid name="consumfeeList" title="耗材费用管理" actionUrl="tsconsumfeeController.do?datagrid" fitColumns="true" checkbox="true" idField="id" fit="true" queryMode="group">
 	<t:dgCol title="主键" field="id" hidden="true"></t:dgCol>
-	<t:dgCol title="发生日期" field="markDate" formatter="yyyy-MM-dd" query="true" queryMode="group"></t:dgCol>
-	<t:dgCol title="科目" field="itemName" query="true" dictionary ="subject"></t:dgCol>
-	<t:dgCol title="明细" field="itemDetail"></t:dgCol>
-	<t:dgCol title="规格" field="standard" ></t:dgCol>
-	<t:dgCol title="单价" field="price"  ></t:dgCol>
-	<t:dgCol title="数量" field="itemNum"></t:dgCol>
-	<t:dgCol title="金额" field="amout"></t:dgCol>
+	<t:dgCol title="发生日期" field="markDate" frozenColumn="true" formatter="yyyy-MM-dd" query="true" queryMode="group"></t:dgCol>
+	<t:dgCol title="科目" field="itemName" frozenColumn="true" query="true" ></t:dgCol>
+	<t:dgCol title="明细"  frozenColumn="true" field="itemDetail"></t:dgCol>
+	<t:dgCol title="规格"  frozenColumn="true" field="standard" ></t:dgCol>
+	<t:dgCol title="单价" frozenColumn="true" field="price"  ></t:dgCol>
+	<t:dgCol title="数量" frozenColumn="true" field="itemNum"></t:dgCol>
+	<t:dgCol title="金额" frozenColumn="true" field="amout"></t:dgCol>
 	<t:dgCol title="创建人" field="createName"></t:dgCol>
 	<t:dgCol title="创建日期" field="createDate" formatter="yyyy-MM-dd hh:mm:ss" ></t:dgCol>
 	<t:dgCol title="修改人" field="updateName"></t:dgCol>
