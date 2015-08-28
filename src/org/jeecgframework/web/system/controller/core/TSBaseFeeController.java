@@ -85,7 +85,18 @@ public class TSBaseFeeController extends BaseController {
 		}
 		cq.add();
 	     this.systemService.getDataGridReturn(cq, true);
-		
+	     String basefeeCount = null;
+	     
+	     if(StringUtil.isNotEmpty(markDateStart)&&StringUtil.isNotEmpty(markDateEnd)){
+	    	 basefeeCount = String.valueOf(tsbasefeeService.findOneForJdbc("select sum(amout) as ssum from t_s_basefee where mark_date >= "+"'"+markDateStart+"'"+ " and mark_date <="+"'"+markDateEnd+"'").get("ssum"));
+	       dataGrid.setFooter("amout:"+basefeeCount+"费用合计");
+	       System.out.println(basefeeCount);
+	     }else{
+	    	 basefeeCount = String.valueOf(tsbasefeeService.findOneForJdbc("select sum(amout) as ssum from t_s_basefee").get("ssum"));
+	    	 dataGrid.setFooter("amout:"+basefeeCount+"费用合计");	    	
+	    	 System.out.println(basefeeCount);
+	     }
+	     
 		TagUtil.datagrid(response, dataGrid);
 	}
 	//删除操作方法

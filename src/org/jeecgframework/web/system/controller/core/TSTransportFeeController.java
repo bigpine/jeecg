@@ -41,7 +41,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Scope("prototype")
 @Controller
 @RequestMapping("/tstransportfeeController")
-// 耗材费用管理controller
+// 外地运输费用管理controller
 public class TSTransportFeeController extends BaseController {
 
 	private static final Logger logger = Logger
@@ -89,7 +89,17 @@ public class TSTransportFeeController extends BaseController {
 		}
 		cq.add();
 		this.systemService.getDataGridReturn(cq, true);
-
+		String tranfeeCount = null;
+		if(StringUtil.isNotEmpty(sendDateStart)&&StringUtil.isNotEmpty(sendDateEnd)){
+			 tranfeeCount = String.valueOf(tstransportfeeService.
+		findOneForJdbc("select sum(amout) as ssum from t_s_transportfee where send_date >= "+"'"+sendDateStart+"'" +"and send_date <= "+"'"+sendDateEnd+"'").get("ssum"));
+			 dataGrid.setFooter("amout:"+tranfeeCount+"费用合计");
+		}else{
+			 tranfeeCount = String.valueOf(tstransportfeeService.
+					findOneForJdbc("select sum(amout) as ssum from t_s_transportfee ").get("ssum"));
+			 dataGrid.setFooter("amout:"+tranfeeCount+"费用合计");
+		}
+		  
 		TagUtil.datagrid(response, dataGrid);
 	}
 

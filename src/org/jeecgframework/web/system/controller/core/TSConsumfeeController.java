@@ -99,7 +99,7 @@ public class TSConsumfeeController extends BaseController {
 		if(StringUtil.isNotEmpty(markDateStart)&&StringUtil.isNotEmpty(markDateEnd)){
 		String amoutCount =
 			String.valueOf(tsconsumfeeService.findOneForJdbc
-					("select sum(amout)as tt from t_s_consumfee where mark_date >=" +"'"+ markDateStart+"'" +" and mark_date <"+ "'"+markDateEnd+"'").get("tt"));
+					("select sum(amout)as tt from t_s_consumfee where mark_date >=" +"'"+ markDateStart+"'" +" and mark_date <= "+ "'"+markDateEnd+"'").get("tt"));
         dataGrid.setFooter("amout:"+amoutCount+"合计");
         System.out.println(amoutCount+"合计的总值");
 		}else{
