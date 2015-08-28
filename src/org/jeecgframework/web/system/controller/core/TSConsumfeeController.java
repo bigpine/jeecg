@@ -106,7 +106,7 @@ public class TSConsumfeeController extends BaseController {
 			String amoutCount =
 				String.valueOf(tsconsumfeeService.findOneForJdbc
 						("select sum(amout)as tt from t_s_consumfee ").get("tt"));
-	        dataGrid.setFooter("amout:"+amoutCount+"合计");
+	        dataGrid.setFooter("amout:"+amoutCount+"费用合计");
 	        System.out.println(amoutCount+"合计的总值");
 		}
 		TagUtil.datagrid(response, dataGrid);
