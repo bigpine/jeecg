@@ -14,7 +14,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 
 @Entity
-@Table(name = "t_s_feecount", schema = "")
+@Table(name = "t_s_fee_count", schema = "")
 @SuppressWarnings("serial")
 public class TSFeeCountEntity implements Serializable {
 
@@ -28,7 +28,7 @@ public class TSFeeCountEntity implements Serializable {
 	
 	private java.math.BigDecimal vehicleFeeCount;  //车辆费用总额
 	
-	private Date makeDate ;     //发生日期
+	private Date markDate ;     //发生日期
 
 	
 	
@@ -80,15 +80,22 @@ public class TSFeeCountEntity implements Serializable {
 	public void setVehicleFeeCount(java.math.BigDecimal vehicleFeeCount) {
 		this.vehicleFeeCount = vehicleFeeCount;
 	}
-	@Column(name ="MARK_DATE",nullable=true)
-	public Date getMakeDate() {
-		return makeDate;
+	
+	/**
+	 *方法: 取得java.util.Date
+	 *@return: java.util.Date  发生日期
+	 */
+	@Column(name ="MARK_DATE",nullable=true,length=20)
+	public java.util.Date getMarkDate(){
+		return this.markDate;
 	}
 
-	public void setMakeDate(Date makeDate) {
-		this.makeDate = makeDate;
+	/**
+	 *方法: 设置java.util.Date
+	 *@param: java.util.Date  发生日期
+	 */
+	public void setMarkDate(java.util.Date markDate){
+		this.markDate = markDate;
 	}
-	
-	
 	
 }

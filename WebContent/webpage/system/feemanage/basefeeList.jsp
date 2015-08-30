@@ -5,7 +5,7 @@
 <div region="center" style="padding: 1px;">
 <t:datagrid name="basefeeList" title="日常费用管理" actionUrl="tsbasefeeController.do?datagrid" fitColumns="true" checkbox="true" idField="id" fit="true" queryMode="group">
 	<t:dgCol title="主键" field="id" hidden="true"></t:dgCol>
-	<t:dgCol title="费用项目" field="feeName" query="true" > <!-- dictionary ="fee_item" --> </t:dgCol>
+	<t:dgCol title="费用项目" field="feeName" query="true"  >   </t:dgCol>
 	<t:dgCol title="楼层" field="floor"></t:dgCol>
 	<t:dgCol title="发生日期" field="markDate" formatter="yyyy-MM-dd" query="true" queryMode="group"></t:dgCol>
 	<t:dgCol title="费用金额" field="amout" ></t:dgCol>
