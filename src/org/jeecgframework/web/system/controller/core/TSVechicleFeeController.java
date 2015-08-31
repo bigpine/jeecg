@@ -1,6 +1,8 @@
 package org.jeecgframework.web.system.controller.core;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -76,8 +78,33 @@ public class TSVechicleFeeController extends BaseController {
 		// 查询条件组装器
 		org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq,
 				tsVechicleFee, request.getParameterMap());
+		String markDateStart=request.getParameter("markDate_begin");
+		String markDateEnd = request.getParameter("markDate_end");
+		if(StringUtil.isNotEmpty(markDateStart)&&StringUtil.isNotEmpty(markDateEnd)){
+			try{
+				cq.ge("markDate", new SimpleDateFormat("yyyy-MM-dd").parse(markDateStart));
+				cq.le("markDate", new SimpleDateFormat("yyyy-MM-dd").parse(markDateEnd));
+			}catch(ParseException e){
+				e.printStackTrace();
+			}
+		}
 		cq.add();
 		this.systemService.getDataGridReturn(cq, true);
+	     String vichfeeCount = null;//市内运输费用总和
+		  if(StringUtil.isNotEmpty(markDateStart)&&StringUtil.isNotEmpty(markDateEnd)){
+		    	 vichfeeCount = String.valueOf(tsvechiclefeeService.findOneForJdbc
+		    	("select sum (oil_fee)+sum(stop_fee)+sum(park_fee)+sum(etc_fee)+sum(wash_fee)+sum(service_fee) as ssum from t_s_vehiclefee  where send_date >= "+"'"+markDateStart+"'"+ " and send_date <="+"'"+markDateEnd+"'").get("ssum"));
+		    	 dataGrid.setFooter("amout:"+vichfeeCount);
+		       
+		         System.out.println(vichfeeCount+"市内运输");	   
+		         }else{
+		    	 vichfeeCount = String.valueOf(tsvechiclefeeService.findOneForJdbc
+		    	("select sum (oil_fee)+sum(stop_fee)+sum(park_fee)+sum(etc_fee)+sum(wash_fee)+sum(service_fee) as ssum from t_s_vehiclefee").get("ssum"));
+
+		    	 dataGrid.setFooter("amout:"+vichfeeCount);
+		    	 System.out.println(vichfeeCount+"市内运输");	 
+		     }
+			
 
 		TagUtil.datagrid(response, dataGrid);
 	}

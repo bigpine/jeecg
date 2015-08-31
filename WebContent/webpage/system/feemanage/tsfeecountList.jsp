@@ -3,7 +3,7 @@
 <t:base type="jquery,easyui,tools,DatePicker"></t:base>
 <div class="easyui-layout" fit="true">
 <div region="center" style="padding: 1px;">
-<t:datagrid name="tsfeecountList" title="test" actionUrl="tsfeecountcontroller.do?datagrid" fitColumns="true" checkbox="true" idField="id" fit="true" queryMode="group">
+<t:datagrid name="tsfeecountList" title="费用统计查询" actionUrl="tsfeecountcontroller.do?datagrid" fitColumns="true" checkbox="true" idField="id" fit="true" queryMode="group">
 	<t:dgCol title="发生日期" field="markDate" formatter="yyyy-MM-dd" query="true" queryMode="group" hidden="false"></t:dgCol>
 	<t:dgCol title="基础费用" field="baseFeeCount" ></t:dgCol>
 	<t:dgCol title="耗材费用" field="consumFeeCount"></t:dgCol>

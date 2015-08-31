@@ -6,7 +6,7 @@
 <t:datagrid name="vechiclefeeList" title="车辆费用管理" actionUrl="tsvechiclefeeController.do?datagrid" fitColumns="true" checkbox="true" idField="id" fit="true" queryMode="group">
 	<t:dgCol title="主键" field="id" hidden="true"></t:dgCol>
 	<t:dgCol title="发车日期" field="sendDate" formatter="yyyy-MM-dd"  query="true" queryMode="group"></t:dgCol>
-	<t:dgCol title="车牌" field="carCode" query="true" dictionary ="car_code"></t:dgCol>
+	<t:dgCol title="车牌" field="carCode" query="true"></t:dgCol>
 	<t:dgCol title="当天公里数" field="dayKm"></t:dgCol>
 	<t:dgCol title="下班公里数" field="outKm" ></t:dgCol>
 	<t:dgCol title="园区停车" field="parkFee"></t:dgCol>
@@ -17,6 +17,7 @@
 	<t:dgCol title="维修费" field="serviceFee" ></t:dgCol>
 	<t:dgCol title="加油公里数" field="addOilKm" ></t:dgCol>
 	<t:dgCol title="加油/公升" field="oilNum" ></t:dgCol>
+	<t:dgCol title="总费用" field="amout"  ></t:dgCol>
 	<t:dgCol title="创建人" field="createName"></t:dgCol>
 	<t:dgCol title="创建日期" field="createDate" formatter="yyyy-MM-dd hh:mm:ss" ></t:dgCol>
 	<t:dgCol title="修改人" field="updateName"></t:dgCol>

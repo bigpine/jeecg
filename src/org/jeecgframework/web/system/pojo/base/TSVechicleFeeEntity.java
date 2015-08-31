@@ -88,6 +88,9 @@ public class TSVechicleFeeEntity implements Serializable {
 	/**维修明细*/
 	@Excel(name="维修明细")
 	private java.lang.String serviceDetail;
+	/**总费用*/
+	private java.math.BigDecimal amout;
+	
 	/**费用基础ID*/
 	/*@Excel(name="费用基础ID")
 	private java.lang.String feeId;*/
@@ -533,4 +536,13 @@ public class TSVechicleFeeEntity implements Serializable {
 		this.feeType = feeType;
 	}
 	*/
+	@Column(name ="AMOUT",nullable=true,scale=2,length=10)
+	public java.math.BigDecimal getAmout() {
+		return amout;
+	}
+
+	public void setAmout(java.math.BigDecimal amout) {
+		this.amout = amout;
+	}
+	
 }
