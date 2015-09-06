@@ -26,11 +26,13 @@
 		ignore="ignore" value="<fmt:formatDate value='${jeecgMinidaoPage.birthday}' type="date" pattern="yyyy-MM-dd hh:mm:ss"/>"> <span class="Validform_checktip"></span></div>
 	<div class="form"><label class="Validform_label">创建时间:</label> <input class="Wdate" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" style="width: 150px" id="createTime" name="createTime"
 		ignore="ignore" value="<fmt:formatDate value='${jeecgMinidaoPage.createTime}' type="date" pattern="yyyy-MM-dd hh:mm:ss"/>"> <span class="Validform_checktip"></span></div>
-	<div class="form"><label class="Validform_label">部门:</label> <select id="depId" name="depId" datatype="*">
-		<c:forEach items="${departList}" var="depart">
-			<option value="${depart.id }" <c:if test="${depart.id==jgDemo.depId}">selected="selected"</c:if>>${depart.departname}</option>
-		</c:forEach>
-	</select> <span class="Validform_checktip"></span></div>
+	<div class="form"><label class="Validform_label">部门:</label>
+		 <select id="depId" name="depId" datatype="*">
+			<c:forEach items="${departList}" var="depart">
+				<option value="${depart.id }" <c:if test="${depart.id==jgDemo.depId}">selected="selected"</c:if>>${depart.departname}</option>
+			</c:forEach>
+		</select>
+		<span class="Validform_checktip"></span></div>
 	<div class="form"><label class="Validform_label">性别:</label> <t:dictSelect field="sex" typeGroupCode="sex" hasLabel="false" defaultVal="${jgDemo.sex}"></t:dictSelect> <span
 		class="Validform_checktip"></span></div>
 	<div class="form"><label class="Validform_label">状态:</label> <input class="inputxt" id="status" name="status" ignore="ignore" value="${jeecgMinidaoPage.status}"> <span

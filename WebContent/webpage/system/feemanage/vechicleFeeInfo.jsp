@@ -48,12 +48,11 @@
 		$('#startKm, #endKm').live('keyup', function(){
 			$('#dayKm').val($('#endKm').val() - $('#startKm').val() );
 		});
+		
 		//计算当天产生的费用总和
-	/* 	var oilFee= $('#oilFee').val;
-		if(oilFee==""){
-			oilFee=0;
-		}
-		var stopFee= $('#stopFee').val;
+	 
+		
+		/* var stopFee= $('#stopFee').val;
 		if(stopFee==""){
 			stopFee=0;
 		}
@@ -72,25 +71,15 @@
 		var etcFee= $('#etcFee').val;
 		if(etcFee==""){
 			etcFee=0;
-		} */
-		$('#oilFee, #stopFee,#pikeFee,#serviceFee,#washFee,#etcFee').live('keyup', function(){
+		}  */
+		/* $('#oilFee, #stopFee,#pikeFee,#serviceFee,#washFee,#etcFee').live('keyup', function(){
 			
 			$('#amout').val(parseFloat($('#oilFee').val()) + parseFloat($('#stopFee').val())+parseFloat($('#pikeFee').val())+parseFloat($('#serviceFee').val())+parseFloat($('#washFee').val())+parseFloat($('#etcFee').val()));
-		});
+		}); */
 		
 		
-	});
+	});	
 
-	/* 	function uploadFile(data){
-			$("#projectId").val(data.obj.id);
-			if($(".uploadify-queue-item").length>0){
-				upload();
-			}else{
-				frameElement.api.opener.reloadTable();
-				frameElement.api.close();
-			}
-		}
-	 */
 	function close() {
 		frameElement.api.close();
 	}
@@ -157,6 +146,7 @@
              <option value="朱黎清">朱黎清</option>              
              <option value="沈韬">沈韬</option>              
              <option value="陆建平">陆建平</option>              
+             <option value="王叶峰">王叶峰</option>              
             </select> 
 	        
 	        </td>

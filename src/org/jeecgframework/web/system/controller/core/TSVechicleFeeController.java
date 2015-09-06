@@ -1,6 +1,7 @@
 package org.jeecgframework.web.system.controller.core;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -78,12 +79,12 @@ public class TSVechicleFeeController extends BaseController {
 		// 查询条件组装器
 		org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq,
 				tsVechicleFee, request.getParameterMap());
-		String markDateStart=request.getParameter("markDate_begin");
-		String markDateEnd = request.getParameter("markDate_end");
+		String markDateStart=request.getParameter("sendDate_begin");
+		String markDateEnd = request.getParameter("sendDate_end");
 		if(StringUtil.isNotEmpty(markDateStart)&&StringUtil.isNotEmpty(markDateEnd)){
 			try{
-				cq.ge("markDate", new SimpleDateFormat("yyyy-MM-dd").parse(markDateStart));
-				cq.le("markDate", new SimpleDateFormat("yyyy-MM-dd").parse(markDateEnd));
+				cq.ge("sendDate", new SimpleDateFormat("yyyy-MM-dd").parse(markDateStart));
+				cq.le("sendDate", new SimpleDateFormat("yyyy-MM-dd").parse(markDateEnd));
 			}catch(ParseException e){
 				e.printStackTrace();
 			}
@@ -104,7 +105,12 @@ public class TSVechicleFeeController extends BaseController {
 		    	 dataGrid.setFooter("amout:"+vichfeeCount);
 		    	 System.out.println(vichfeeCount+"市内运输");	 
 		     }
-			
+			/*if(StringUtil.isNotEmpty(markDateStart)&&StringUtil.isNotEmpty(markDateEnd)&&StringUtil.isNotEmpty(carCode)){
+				 vichfeeCount = String.valueOf(tsvechiclefeeService.findOneForJdbc
+					    	("select sum (oil_fee)+sum(stop_fee)+sum(park_fee)+sum(etc_fee)+sum(wash_fee)+sum(service_fee) as ssum from t_s_vehiclefee  where car_code = "+carCode +" and send_date >= "+"'"+markDateStart+"'"+ " and send_date <="+"'"+markDateEnd+"'").get("ssum"));
+					    	 dataGrid.setFooter("amout:"+vichfeeCount);
+			}*/
+		  
 
 		TagUtil.datagrid(response, dataGrid);
 	}
@@ -157,6 +163,8 @@ public class TSVechicleFeeController extends BaseController {
 	@ResponseBody
 	public AjaxJson save(TSVechicleFeeEntity tsVechicleFee,
 			HttpServletRequest request) {
+		
+		dealAmountFee(tsVechicleFee);
 		AjaxJson j = new AjaxJson();
 		if (StringUtil.isNotEmpty(tsVechicleFee.getId())) {
 			TSVechicleFeeEntity t = tsvechiclefeeService.get(
@@ -164,6 +172,10 @@ public class TSVechicleFeeController extends BaseController {
 			message = "更新成功";
 			try {
 				MyBeanUtils.copyBeanNotNull2Bean(tsVechicleFee, t);
+				/*BigDecimal amout = t.getAmout();
+				if(amout==null){
+					amout= 0 ;
+				}*/
 				tsvechiclefeeService.saveOrUpdate(t);
 				systemService.addLog(message, Globals.Log_Type_UPDATE,
 						Globals.Log_Leavel_INFO);
@@ -178,6 +190,31 @@ public class TSVechicleFeeController extends BaseController {
 		}
 		j.setObj(tsVechicleFee);
 		return j;
+	}
+
+	/**
+	 * 计算总费用
+	 * @param tsVechicleFee
+	 */
+	private void dealAmountFee(TSVechicleFeeEntity tsVechicleFee) {
+		tsVechicleFee.setDayKm(tsVechicleFee.getDayKm()==null?new BigDecimal(0.0D):tsVechicleFee.getDayKm());
+		tsVechicleFee.setOutKm(tsVechicleFee.getOutKm()==null?new BigDecimal(0.0D):tsVechicleFee.getOutKm());
+		tsVechicleFee.setParkFee(tsVechicleFee.getParkFee()==null?new BigDecimal(0.0D):tsVechicleFee.getParkFee());
+		tsVechicleFee.setOilFee(tsVechicleFee.getOilFee()==null?new BigDecimal(0.0D):tsVechicleFee.getOilFee());
+		tsVechicleFee.setOilMouse(tsVechicleFee.getOilMouse()==null?new BigDecimal(0.0D):tsVechicleFee.getOilMouse());
+		tsVechicleFee.setStopFee(tsVechicleFee.getStopFee()==null?new BigDecimal(0.0D):tsVechicleFee.getStopFee());
+		tsVechicleFee.setPikeFee(tsVechicleFee.getPikeFee()==null?new BigDecimal(0.0D):tsVechicleFee.getPikeFee());
+		tsVechicleFee.setServiceFee(tsVechicleFee.getServiceFee()==null?new BigDecimal(0.0D):tsVechicleFee.getServiceFee());
+		tsVechicleFee.setWashFee(tsVechicleFee.getWashFee()==null?new BigDecimal(0.0D):tsVechicleFee.getWashFee());
+		tsVechicleFee.setEtcFee(tsVechicleFee.getEtcFee()==null?new BigDecimal(0.0D):tsVechicleFee.getEtcFee());
+		tsVechicleFee.setStartKm(tsVechicleFee.getStartKm()==null?new BigDecimal(0.0D):tsVechicleFee.getStartKm());
+		tsVechicleFee.setEndKm(tsVechicleFee.getEndKm()==null?new BigDecimal(0.0D):tsVechicleFee.getEndKm());
+		tsVechicleFee.setAddOilKm(tsVechicleFee.getAddOilKm()==null?new BigDecimal(0.0D):tsVechicleFee.getAddOilKm());
+		tsVechicleFee.setOilNum(tsVechicleFee.getOilNum()==null?new BigDecimal(0.0D):tsVechicleFee.getOilNum());
+		
+		BigDecimal amount = tsVechicleFee.getParkFee().add(tsVechicleFee.getOilFee()).add(tsVechicleFee.getPikeFee())
+			.add(tsVechicleFee.getStopFee()).add(tsVechicleFee.getServiceFee()).add(tsVechicleFee.getEtcFee()).add(tsVechicleFee.getWashFee());
+		tsVechicleFee.setAmout(amount);
 	}
 
 	// 新增 配送信息页面,查看详情,修改页面。

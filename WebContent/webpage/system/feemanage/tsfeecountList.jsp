@@ -9,11 +9,6 @@
 	<t:dgCol title="耗材费用" field="consumFeeCount"></t:dgCol>
 	<t:dgCol title="市内运输费用" field="vehicleFeeCount" ></t:dgCol>
 	<t:dgCol title="外地运输费用" field="tranFeeCount"  ></t:dgCol>
-	
-	<t:dgCol title="操作" field="opt"></t:dgCol>
-	
-	<t:dgDelOpt title="查看详情" url="" />
-	
 </t:datagrid>
 </div>
 </div>

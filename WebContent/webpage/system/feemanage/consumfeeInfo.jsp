@@ -12,15 +12,136 @@
 		if (location.href.indexOf("load=detail") != -1) {
 			$(".jeecgDetail").hide();
 		}
-		
+		var itemName = $("#itemName1").val();
+		if(itemName != ''){
+			var isExist = false;
+			var count = $("#itemName").find("option").length;
+			for(var i=0; i<count; i++){
+				if($("#itemName").get(0).options[i].value == itemName){
+					isExist = true;
+					break;
+				}
+			}
+			if(!isExist){
+				$("#itemName").append("<option value='${tsConsumFeePage.itemName}'>${tsConsumFeePage.itemName}</option>");
+			}
+			$("#itemName").attr("value",'${tsConsumFeePage.itemName}');
+		} else {
+			var id = $("#itemName").val();
+			getItemDetailList(id);
+		}
 		
 		//$('#amout').val($('#price').val() * $('#itemNum').val() );
 		
 		$('#price, #itemNum').live('keyup', function(){
 			$('#amout').val($('#price').val() * $('#itemNum').val() );
 		});
-		
 	});
+	
+	function getItemDetailList(id) {
+		if(id==''){
+			$('#itemDetail').html("");
+			return;
+		}
+		window.top.$.messager.progress({
+			text : '正在加载数据....',
+			interval : 300
+		});
+		var url = "tsconsumfeeController.do?getItemDetailList&itemName=" + encodeURIComponent(encodeURIComponent(id));
+		$.ajax({
+			type : 'POST',
+			url : url,
+			success : function(data) {
+				var d = $.parseJSON(data);
+				if (d.success) {
+					window.top.$.messager.progress('close');
+					$('#itemDetail').html(d.msg);
+					var id = $("#itemDetail").val();
+					getStandardList(id);
+
+				}
+			}
+		});
+	}
+	
+	function getStandardList(id) {
+		if(id==''){
+			$('#itemDetail').html("");
+			return;
+		}
+
+		window.top.$.messager.progress({
+			text : '正在加载数据....',
+			interval : 300
+		});
+		var url = "tsconsumfeeController.do?getStandardList&itemName="+encodeURIComponent(encodeURIComponent($('#itemName').val()))+"&itemDetail=" + encodeURIComponent(encodeURIComponent(id));
+		$.ajax({
+			type : 'POST',
+			url : url,
+			success : function(data) {
+				var d = $.parseJSON(data);
+				if (d.success) {
+					window.top.$.messager.progress('close');
+					$('#standard').html(d.msg);
+					var id = $("#standard").val();
+					getSupplierList(id);
+
+				}
+			}
+		});
+	}
+	
+	function getSupplierList(id) {
+		if(id==''){
+			$('#standard').html("");
+			return;
+		}
+
+		window.top.$.messager.progress({
+			text : '正在加载数据....',
+			interval : 300
+		});
+		var url = "tsconsumfeeController.do?getSupplierList&itemName="+encodeURIComponent(encodeURIComponent($('#itemName').val()))+"&itemDetail="+encodeURIComponent(encodeURIComponent($('#itemDetail').val()))+"&standard=" + encodeURIComponent(encodeURIComponent(id));
+		$.ajax({
+			type : 'POST',
+			url : url,
+			success : function(data) {
+				var d = $.parseJSON(data);
+				if (d.success) {
+					window.top.$.messager.progress('close');
+					$('#supplier').html(d.msg);
+					var id = $("#supplier").val();
+					getPriceList(id);
+
+				}
+			}
+		});
+	}
+	
+	function getPriceList(id) {
+		if(id==''){
+			$('#supplier').html("");
+			return;
+		}
+
+		window.top.$.messager.progress({
+			text : '正在加载数据....',
+			interval : 300
+		});
+		var url = "tsconsumfeeController.do?getPriceList&itemName="+encodeURIComponent(encodeURIComponent($('#itemName').val()))+"&itemDetail="+encodeURIComponent(encodeURIComponent($('#itemDetail').val()))+"&standard="+encodeURIComponent(encodeURIComponent($('#standard').val()))+"&supplier=" + encodeURIComponent(encodeURIComponent(id));
+		$.ajax({
+			type : 'POST',
+			url : url,
+			success : function(data) {
+				var d = $.parseJSON(data);
+				if (d.success) {
+					window.top.$.messager.progress('close');
+					$('#price').html(d.msg);
+
+				}
+			}
+		});
+	}
 
 	function close() {
 		frameElement.api.close();
@@ -71,7 +192,7 @@
 	} 
 
 	 */
-	
+
 </script>
 <!-- 弹出页面窗口大小控制 -->
 <style type="text/css">
@@ -88,6 +209,7 @@
 	<t:formvalid formid="formobj" dialog="true" usePlugin="password"
 		layout="table" action="tsconsumfeeController.do?save">
 		<input id="id" name="id" type="hidden" value="${tsConsumFeePage.id }">
+		<input id="itemName1" name="itemName1" type="hidden" value="${tsConsumFeePage.itemName}">
 
 		<input id="createName" name="createUser" type="hidden"
 			value="${tsConsumFeePage.createName}">
@@ -103,36 +225,49 @@
 			value="${tsConsumFeePage.createBy}">
 		<table cellpadding="0" cellspacing="1" class="formtable">
 			<tr>
-			<td align="right"><label class="Validform_label">科目:</label></td>
+			<%-- <td align="right"><label class="Validform_label">科目:</label></td>
 			  <td>
 	         <t:dictSelect field="itemName"  typeGroupCode="subject" defaultVal="${tsConsumFeePage.itemName}" hasLabel="false"></t:dictSelect>
-	        </td>
-	        
-	           <!--  <td>
-	             <select name="province" onchange="cityName(this.selectedIndex)"> 
-                 <option value="">请选择科目</option> 
-                 </select>
-	           </td> -->
-	          <td align="right"><label class="Validform_label">明细: </label></td>
-		      <td class="value"><input class="inputxt" id="itemDetail" name="itemDetail"  value="${tsConsumFeePage.itemDetail}"> <span class="Validform_checktip"></span></td>
-	         
-	        <!--  <td>
-	         <select name="city"> 
-            <option value="">请选择明细</option> 
-            </select> 
-            </td> -->
+	        </td> --%>
+	        <td align="right"><label class="Validform_label">科目:</label></td>
+			
+	         <td class="value">
+       		 <select id="itemName" name="itemName" onchange="getItemDetailList(this.value)" datatype="*" >
+				<c:forEach items="${itemNameList}" var="itemName">
+					<option value="${itemName }" <c:if test="${itemName==jgDemo.itemName}">selected="selected"</c:if>>${itemName}</option>
+				</c:forEach>
+			</select>
+            </td>
+				<td align="right"><label class="Validform_label">明细: </label></td>
+		         <td class="value">
+		       		 <select id="itemDetail" name="itemDetail" onchange="getStandardList(this.value)" datatype="*">
+						<option value=${tsConsumFeePage.itemDetail}>${tsConsumFeePage.itemDetail}</option>    
+					</select>
+				</td>
 		</tr>
 		<tr>
              <td align="right"><label class="Validform_label">规格: </label></td>
-		     <td class="value"><input class="inputxt" id="standard" name="standard"  value="${tsConsumFeePage.standard}"> <span class="Validform_checktip"></span></td>
-
+		     <td class="value">
+		     	<select id="standard" name="standard" onchange="getSupplierList(this.value)"  datatype="*">
+					<option value=${tsConsumFeePage.standard}>${tsConsumFeePage.standard}</option>    
+		     	</select>
+		     </td>
+		     
 			 <td align="right"><label class="Validform_label"> 供应商: </label></td>
-		     <td class="value"><input class="inputxt" id="supplier" name="supplier"  value="${tsConsumFeePage.supplier}"> <span class="Validform_checktip"></span></td>
+		     <td class="value">
+		     	<select id="supplier" name="supplier" onchange="getPriceList(this.value)" datatype="*">
+             		<option value=${tsConsumFeePage.supplier}>${tsConsumFeePage.supplier}</option>    
+		     	</select>
+		     </td>
 
 			</tr>
            <tr>
              <td align="right"><label class="Validform_label">单价: </label></td>
-		     <td class="value"><input class="inputxt" id="price" name="price"  value="${tsConsumFeePage.price}"> <span class="Validform_checktip"></span></td>
+		     <td class="value">
+		     	<select id="price" name="price" datatype="*">
+					<option value=${tsConsumFeePage.price}>${tsConsumFeePage.price}</option>    
+		     	</select>
+		     </td>
 
 			 <td align="right"><label class="Validform_label"> 数量: </label></td>
 		     <td class="value"><input class="inputxt" id="itemNum" name="itemNum"  value="${tsConsumFeePage.itemNum}"> <span class="Validform_checktip"></span></td>

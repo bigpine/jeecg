@@ -29,6 +29,7 @@ import org.jeecgframework.poi.excel.entity.ExportParams;
 import org.jeecgframework.poi.excel.entity.ImportParams;
 import org.jeecgframework.poi.excel.entity.vo.NormalExcelConstants;
 import org.jeecgframework.tag.core.easyui.TagUtil;
+import org.jeecgframework.web.system.pojo.base.TSConsumbaseEntity;
 import org.jeecgframework.web.system.pojo.base.TSConsumfeeEntity;
 import org.jeecgframework.web.system.service.SystemService;
 import org.jeecgframework.web.system.service.TSConsumfeeServiceI;
@@ -192,6 +193,16 @@ public class TSConsumfeeController extends BaseController {
 					TSConsumfeeEntity.class, tsConsumFee.getId());
 			req.setAttribute("tsConsumFeePage", tsConsumFee);
 		}
+
+		List<TSConsumbaseEntity> consumbaseList = systemService.getList(TSConsumbaseEntity.class);
+		List<String> itemNameList = new ArrayList<String>();
+		for (TSConsumbaseEntity tsConsumbaseEntity : consumbaseList) {
+			if(!itemNameList.contains(tsConsumbaseEntity.getItemName())){
+				itemNameList.add(tsConsumbaseEntity.getItemName());
+			}
+		}
+		
+		req.setAttribute("itemNameList", itemNameList);
 		return new ModelAndView("system/feemanage/consumfeeInfo");
 
 	}
@@ -266,5 +277,130 @@ public class TSConsumfeeController extends BaseController {
 			}
 		}
 		return j;
+	}
+	
+	/**
+	 * AJAX 示例下拉框
+	 * 
+	 * @param req
+	 * @return
+	 */
+	@RequestMapping(params = "getItemDetailList")
+	@ResponseBody
+	public AjaxJson getItemDetailList(HttpServletRequest req){
+		AjaxJson ajaxJson = new AjaxJson();
+		
+		String itemName = StringUtil.getEncodePra(req.getParameter("itemName"));
+		String sql = "select  distinct t.item_detail from t_s_consumfee t where t.item_name = '"+itemName+"'";
+		List<String> itemDetailList = this.systemService.findListbySql(sql);
+		
+		String options = "";
+		for (String itemDetail : itemDetailList) {
+			options += "<option value=\""+itemDetail+"\" >"+itemDetail+"</option>";
+		}
+		ajaxJson.setMsg(options);
+		return ajaxJson;
+	}
+	
+
+	/**
+	 * AJAX 示例下拉框
+	 * 
+	 * @param req
+	 * @return
+	 */
+	@RequestMapping(params = "getStandardList")
+	@ResponseBody
+	public AjaxJson getStandardList(HttpServletRequest req){
+		AjaxJson ajaxJson = new AjaxJson();
+		
+		String itemDetail = StringUtil.getEncodePra(req.getParameter("itemDetail"));
+		String itemName = StringUtil.getEncodePra(req.getParameter("itemName"));
+		String sql = "select distinct t.standard from t_s_consumfee t where 1=1 ";
+		if(itemName!=null){
+			sql += " and t.item_name = '"+itemName+"'";
+		}
+		if(itemDetail!=null){
+			sql += " and t.item_detail = '"+itemDetail+"'";
+		}
+		List<String> standardList = this.systemService.findListbySql(sql);
+		
+		String options = "";
+		for (String standard : standardList) {
+			options += "<option value=\""+standard+"\">"+standard+"</option>";
+		}
+		ajaxJson.setMsg(options);
+		return ajaxJson;
+	}
+
+
+	/**
+	 * AJAX 示例下拉框
+	 * 
+	 * @param req
+	 * @return
+	 */
+	@RequestMapping(params = "getSupplierList")
+	@ResponseBody
+	public AjaxJson getSupplierList(HttpServletRequest req){
+		AjaxJson ajaxJson = new AjaxJson();
+		String standard = StringUtil.getEncodePra(req.getParameter("standard"));
+		String itemDetail = StringUtil.getEncodePra(req.getParameter("itemDetail"));
+		String itemName = StringUtil.getEncodePra(req.getParameter("itemName"));
+		String sql = "select distinct t.supplier from t_s_consumfee t where 1=1 ";
+		if(itemName!=null){
+			sql += " and t.item_name = '"+itemName+"'";
+		}
+		if(itemDetail!=null){
+			sql += " and t.item_detail = '"+itemDetail+"'";
+		}
+		if(standard!=null){
+			sql += " and t.standard = '"+standard+"'";
+		}
+		List<String> supplierList = this.systemService.findListbySql(sql);
+		
+		String options = "";
+		for (String supplier : supplierList) {
+			options += "<option value=\""+supplier+"\">"+supplier+"</option>";
+		}
+		ajaxJson.setMsg(options);
+		return ajaxJson;
+	}
+
+	/**
+	 * AJAX 示例下拉框
+	 * 
+	 * @param req
+	 * @return
+	 */
+	@RequestMapping(params = "getPriceList")
+	@ResponseBody
+	public AjaxJson getPriceList(HttpServletRequest req){
+		AjaxJson ajaxJson = new AjaxJson();
+		String supplier = StringUtil.getEncodePra(req.getParameter("supplier"));
+		String standard = StringUtil.getEncodePra(req.getParameter("standard"));
+		String itemDetail = StringUtil.getEncodePra(req.getParameter("itemDetail"));
+		String itemName = StringUtil.getEncodePra(req.getParameter("itemName"));
+		String sql = "select distinct t.price from t_s_consumfee t where 1=1 ";
+		if(itemName!=null){
+			sql += " and t.item_name = '"+itemName+"'";
+		}
+		if(itemDetail!=null){
+			sql += " and t.item_detail = '"+itemDetail+"'";
+		}
+		if(standard!=null){
+			sql += " and t.standard = '"+standard+"'";
+		}
+		if(supplier!=null){
+			sql += " and t.supplier = '"+supplier+"'";
+		}
+		List<Double> priceList = this.systemService.findListbySql(sql);
+		
+		String options = "";
+		for (Double price : priceList) {
+			options += "<option value=\""+price.toString()+"\">"+price.toString()+"</option>";
+		}
+		ajaxJson.setMsg(options);
+		return ajaxJson;
 	}
 }

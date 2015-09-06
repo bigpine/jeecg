@@ -17,6 +17,8 @@
 	<t:dgCol title="维修费" field="serviceFee" ></t:dgCol>
 	<t:dgCol title="加油公里数" field="addOilKm" ></t:dgCol>
 	<t:dgCol title="加油/公升" field="oilNum" ></t:dgCol>
+	<t:dgCol title="ETC费用" field="etcFee" ></t:dgCol>
+	<t:dgCol title="洗车费" field="washFee" ></t:dgCol>
 	<t:dgCol title="总费用" field="amout"  ></t:dgCol>
 	<t:dgCol title="创建人" field="createName"></t:dgCol>
 	<t:dgCol title="创建日期" field="createDate" formatter="yyyy-MM-dd hh:mm:ss" ></t:dgCol>
@@ -24,7 +26,7 @@
 	<t:dgCol title="修改日期" field="updateDate" ></t:dgCol>
 	<t:dgCol title="操作" field="opt"></t:dgCol>
 	<t:dgDelOpt title="删除" url="tsvechiclefeeController.do?del&id={id}" />
-	<t:dgToolBar title="录入" icon="icon-add" url="tsvechiclefeeController.do?addorupdate" funname="add" width="100%" height="100%"></t:dgToolBar>
+	<t:dgToolBar title="录入" icon="icon-add" url="tsvechiclefeeController.do?addorupdate" funname="add"></t:dgToolBar>
 	<t:dgToolBar title="编辑" icon="icon-edit" url="tsvechiclefeeController.do?addorupdate" funname="update" width="100%" height="100%"></t:dgToolBar>
 	<t:dgToolBar title="查看" icon="icon-search" url="tsvechiclefeeController.do?addorupdate" funname="detail" width="100%" height="100%"></t:dgToolBar>
     <t:dgToolBar title="导入" icon="icon-put" funname="ImportXls"></t:dgToolBar>
