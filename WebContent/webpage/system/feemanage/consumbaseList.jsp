@@ -16,7 +16,7 @@
 	<t:dgCol title="修改人" field="updateName"></t:dgCol>
 	<t:dgCol title="修改日期" field="updateDate" ></t:dgCol>
 	<t:dgCol title="操作" field="opt"></t:dgCol>
-	<t:dgDelOpt title="删除" url="tsconsumfeeController.do?del&id={id}" />
+	<t:dgDelOpt title="删除" url="tsconsumbaseController.do?del&id={id}" />
 	<t:dgToolBar title="录入" icon="icon-add" url="tsconsumbaseController.do?addorupdate" funname="add" ></t:dgToolBar>
 	<t:dgToolBar title="编辑" icon="icon-edit" url="tsconsumbaseController.do?addorupdate" funname="update"></t:dgToolBar>
 	<t:dgToolBar title="查看" icon="icon-search" url="tsconsumbaseController.do?addorupdate" funname="detail"></t:dgToolBar>

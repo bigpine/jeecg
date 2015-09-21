@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.jeecgframework.core.common.controller.BaseController;
+import org.jeecgframework.core.common.exception.BusinessException;
 import org.jeecgframework.core.common.hibernate.qbc.CriteriaQuery;
 import org.jeecgframework.core.common.model.json.AjaxJson;
 import org.jeecgframework.core.common.model.json.DataGrid;
@@ -13,6 +14,7 @@ import org.jeecgframework.core.constant.Globals;
 import org.jeecgframework.core.util.MyBeanUtils;
 import org.jeecgframework.core.util.StringUtil;
 import org.jeecgframework.tag.core.easyui.TagUtil;
+import org.jeecgframework.web.system.pojo.base.TSConsumbaseEntity;
 import org.jeecgframework.web.system.pojo.base.TSTaskInfoEntity;
 import org.jeecgframework.web.system.service.SystemService;
 import org.jeecgframework.web.system.service.TSTaskInfoServiceI;
@@ -103,6 +105,32 @@ public class TSTaskInfoController extends BaseController {
 	}
 
 
+	/**
+	 * 批量删除
+	 * 
+	 * @return
+	 */
+	 @RequestMapping(params = "doBatchDel")
+	@ResponseBody
+	public AjaxJson doBatchDel(String ids,HttpServletRequest request){
+		AjaxJson j = new AjaxJson();
+		message = "数据删除成功";
+		try{
+			for(String id:ids.split(",")){
+				TSTaskInfoEntity tstaskInfo = systemService.getEntity(TSTaskInfoEntity.class,id);
+				tstaskInfoService.delete(tstaskInfo);
+				systemService.addLog(message, Globals.Log_Type_DEL, Globals.Log_Leavel_INFO);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			message = "删除失败";
+			throw new BusinessException(e.getMessage());
+		}
+		j.setMsg(message);
+		return j;
+	}
+	
+	
 	/**
 	 * 添加任务管理
 	 * 

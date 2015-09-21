@@ -19,7 +19,7 @@
 	<t:dgCol title="状态" field="status" replace="未处理_0,已处理_1" width="60" query="true"></t:dgCol>
 	<t:dgCol title="操作" field="opt" width="150"></t:dgCol>
 	<%--update-end--Author:fangwenrong  Date:20150510 for：添加各项显示长度，解决显示排版问题--%>
-<!--	<t:dgFunOpt exp="status#eq#0" operationCode="szqm" funname="szqm(id)" title="审核" />-->
+    <t:dgFunOpt exp="status#eq#0" operationCode="szqm" funname="szqm(id)" title="审核" />
 	<t:dgDelOpt operationCode="del" title="删除" url="jeecgDemoController.do?del&id={id}" />
 	<t:dgToolBar operationCode="add" title="录入" icon="icon-add" url="jeecgDemoController.do?addorupdate" funname="add"></t:dgToolBar>
 	<t:dgToolBar operationCode="mobileAdd" title="mobile录入" icon="icon-add" url="jeecgDemoController.do?addorupdatemobile" funname="addMobile"></t:dgToolBar>

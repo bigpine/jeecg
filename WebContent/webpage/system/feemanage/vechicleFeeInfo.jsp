@@ -28,20 +28,20 @@
 			$("#carCode").attr("value",'${tsVechicleFeePage.carCode}');
 		}
 		
-		var driverName = $("#driverName1").val();
-		if(driverName != ''){
+		var driver = $("#driver1").val();
+		if(driver != ''){
 			var isExist = false;
-			var count = $("#driverName").find("option").length;
+			var count = $("#driver").find("option").length;
 			for(var i=0; i<count; i++){
-				if($("#driverName").get(0).options[i].value == driverName){
+				if($("#driver").get(0).options[i].value == driver){
 					isExist = true;
 					break;
 				}
 			}
 			if(!isExist){
-				$("#driverName").append("<option value='${tsVechicleFeePage.driver}'>${tsVechicleFeePage.driver}</option>");
+				$("#driver").append("<option value='${tsVechicleFeePage.driver}'>${tsVechicleFeePage.driver}</option>");
 			}
-			$("#driverName").attr("value",'${tsVechicleFeePage.driver}');
+			$("#driver").attr("value",'${tsVechicleFeePage.driver}');
 		}
 		
 		//计算当天行驶里程数
@@ -99,7 +99,7 @@
 	<t:formvalid formid="formobj" dialog="true" usePlugin="password"
 		layout="table" action="tsvechiclefeeController.do?save">
 		<input id="id" name="id" type="hidden" value="${tsVechicleFeePage.id }">
-		<input id="driverName1" name="driverName1" type="hidden" value="${tsVechicleFeePage.driver}">
+		<input id="driver1" name="driver1" type="hidden" value="${tsVechicleFeePage.driver}">
 	    <input id="carCode1" name="carCode1" type="hidden" value="${tsVechicleFeePage.carCode}">
 		<input id="createName" name="createUser" type="hidden"
 			value="${tsVechicleFeePage.createName}">
@@ -116,8 +116,8 @@
 		<table cellpadding="0" cellspacing="1" class="formtable">
 			<tr>
 			<td align="right"><label class="Validform_label"> 出车日期: </label></td>
-			<td class="value"><input class="Wdate" onClick="WdatePicker()" style="width: 150px" id="sendDate" name="sendDate" ignore="ignore"
-				value="<fmt:formatDate value='${tsVechicleFeePage.sendDate}' type="date" pattern="yyyy-MM-dd"/>"> <span class="Validform_checktip"></span></td>
+			<td class="value"><input class="Wdate" onClick="WdatePicker()" style="width: 150px" id="sendDate" name="sendDate" ignore="ignore" datatype="*"
+				value="<fmt:formatDate value='${tsVechicleFeePage.sendDate}' type="date" pattern="yyyy-MM-dd"/>" > <span class="Validform_checktip"></span></td>
 			
 			<td align="right"><label class="Validform_label">总费用</label></td>
 		     <td class="value"><input class="inputxt" id="amout" name="amout"  value="${tsVechicleFeePage.amout} " readonly="readonly"> <span class="Validform_checktip"></span></td>
@@ -135,12 +135,13 @@
              <option value="GB7559">沪GB7559</option>              
              <option value="L58137">沪L58137</option>              
              <option value="GB5696">沪GB5696</option>              
+             <option value="其他">其他</option>              
             </select> 
            </td>
              <td align="right"><label class="Validform_label">驾驶员:</label></td>
 			 
 	        <td class="value">
-	        <select  id="driverName" name="driverName" >
+	        <select  id="driver" name="driver" >
              <option value="孙俊">孙俊</option>    
              <option value="陆惠明">陆惠明</option> 			 
              <option value="朱黎清">朱黎清</option>              
@@ -155,10 +156,10 @@
 			</tr>
 			  <tr>
              <td align="right"><label class="Validform_label">出车里程: </label></td>
-		     <td class="value"><input class="inputxt" id="startKm" name="startKm"  value="${tsVechicleFeePage.startKm}"> <span class="Validform_checktip"></span></td>
+		     <td class="value"><input class="inputxt" id="startKm" name="startKm"  value="${tsVechicleFeePage.startKm}" datatype="n"> <span class="Validform_checktip"></span></td>
 
 			 <td align="right"><label class="Validform_label"> 回车里程: </label></td>
-		     <td class="value"><input class="inputxt" id="endKm" name="endKm"  value="${tsVechicleFeePage.endKm}"> <span class="Validform_checktip"></span></td>
+		     <td class="value"><input class="inputxt" id="endKm" name="endKm"  value="${tsVechicleFeePage.endKm}" datatype="n"> <span class="Validform_checktip"></span></td>
 
 			</tr>
 			<tr>

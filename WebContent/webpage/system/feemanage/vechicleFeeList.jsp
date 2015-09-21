@@ -7,6 +7,7 @@
 	<t:dgCol title="主键" field="id" hidden="true"></t:dgCol>
 	<t:dgCol title="发车日期" field="sendDate" formatter="yyyy-MM-dd"  query="true" queryMode="group"></t:dgCol>
 	<t:dgCol title="车牌" field="carCode" query="true"></t:dgCol>
+	<t:dgCol title="司机" field="driver" query="true"></t:dgCol>
 	<t:dgCol title="当天公里数" field="dayKm"></t:dgCol>
 	<t:dgCol title="下班公里数" field="outKm" ></t:dgCol>
 	<t:dgCol title="园区停车" field="parkFee"></t:dgCol>
@@ -15,6 +16,8 @@
 	<t:dgCol title="停车费" field="stopFee" ></t:dgCol>
 	<t:dgCol title="通行费" field="pikeFee" ></t:dgCol>
 	<t:dgCol title="维修费" field="serviceFee" ></t:dgCol>
+	<t:dgCol title="出车里程" field="startKm" ></t:dgCol>
+	<t:dgCol title="回车里程" field="endKm" ></t:dgCol>
 	<t:dgCol title="加油公里数" field="addOilKm" ></t:dgCol>
 	<t:dgCol title="加油/公升" field="oilNum" ></t:dgCol>
 	<t:dgCol title="ETC费用" field="etcFee" ></t:dgCol>
@@ -29,7 +32,8 @@
 	<t:dgToolBar title="录入" icon="icon-add" url="tsvechiclefeeController.do?addorupdate" funname="add"></t:dgToolBar>
 	<t:dgToolBar title="编辑" icon="icon-edit" url="tsvechiclefeeController.do?addorupdate" funname="update" width="100%" height="100%"></t:dgToolBar>
 	<t:dgToolBar title="查看" icon="icon-search" url="tsvechiclefeeController.do?addorupdate" funname="detail" width="100%" height="100%"></t:dgToolBar>
-    <t:dgToolBar title="导入" icon="icon-put" funname="ImportXls"></t:dgToolBar>
+    <t:dgToolBar title="批量删除" icon="icon-remove" url="tsvechiclefeeController.do?doDeleteALLSelect" funname="deleteALLSelect"></t:dgToolBar>
+    <%-- <t:dgToolBar title="导入" icon="icon-put" funname="ImportXls"></t:dgToolBar> --%>
     <t:dgToolBar title="导出" icon="icon-putout" funname="ExportXls"></t:dgToolBar>
 </t:datagrid>
 </div>

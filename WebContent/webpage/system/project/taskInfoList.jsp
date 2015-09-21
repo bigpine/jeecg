@@ -23,6 +23,7 @@
 	<t:dgToolBar title="录入" icon="icon-add" url="tstaskInfoController.do?addorupdate" funname="add" width="100%" height="100%"></t:dgToolBar>
 	<t:dgToolBar title="编辑" icon="icon-edit" url="tstaskInfoController.do?addorupdate" funname="update" width="100%" height="100%"></t:dgToolBar>
 	<t:dgToolBar title="查看" icon="icon-search" url="tstaskInfoController.do?addorupdate" funname="detail" width="100%" height="100%"></t:dgToolBar>
+	<t:dgToolBar title="批量删除" icon="icon-del" url="tstaskInfoController.do?doBatchDel" funname="del" width="100%" height="100%"></t:dgToolBar>
 </t:datagrid>
 </div>
 </div>

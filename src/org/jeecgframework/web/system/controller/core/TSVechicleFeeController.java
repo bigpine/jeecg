@@ -74,7 +74,14 @@ public class TSVechicleFeeController extends BaseController {
 	public void datagrid(TSVechicleFeeEntity tsVechicleFee,
 			HttpServletRequest request, HttpServletResponse response,
 			DataGrid dataGrid) {
-
+        
+		if(StringUtil.isNotEmpty(tsVechicleFee.getCarCode())){
+			tsVechicleFee.setCarCode("*"+tsVechicleFee.getCarCode()+"*");
+			}
+		if(StringUtil.isNotEmpty(tsVechicleFee.getDriver())){
+			tsVechicleFee.setDriver("*"+tsVechicleFee.getDriver()+"*");
+		}
+		
 		CriteriaQuery cq = new CriteriaQuery(TSVechicleFeeEntity.class, dataGrid);
 		// 查询条件组装器
 		org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq,
@@ -105,12 +112,6 @@ public class TSVechicleFeeController extends BaseController {
 		    	 dataGrid.setFooter("amout:"+vichfeeCount);
 		    	 System.out.println(vichfeeCount+"市内运输");	 
 		     }
-			/*if(StringUtil.isNotEmpty(markDateStart)&&StringUtil.isNotEmpty(markDateEnd)&&StringUtil.isNotEmpty(carCode)){
-				 vichfeeCount = String.valueOf(tsvechiclefeeService.findOneForJdbc
-					    	("select sum (oil_fee)+sum(stop_fee)+sum(park_fee)+sum(etc_fee)+sum(wash_fee)+sum(service_fee) as ssum from t_s_vehiclefee  where car_code = "+carCode +" and send_date >= "+"'"+markDateStart+"'"+ " and send_date <="+"'"+markDateEnd+"'").get("ssum"));
-					    	 dataGrid.setFooter("amout:"+vichfeeCount);
-			}*/
-		  
 
 		TagUtil.datagrid(response, dataGrid);
 	}
@@ -136,7 +137,7 @@ public class TSVechicleFeeController extends BaseController {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(params = "doBatchDel")
+	@RequestMapping(params = "doDeleteALLSelect")
 	@ResponseBody
 	public AjaxJson doBatchDel(String ids, HttpServletRequest request) {
 		AjaxJson j = new AjaxJson();
@@ -176,6 +177,7 @@ public class TSVechicleFeeController extends BaseController {
 				if(amout==null){
 					amout= 0 ;
 				}*/
+				System.out.println(t.getDriver());
 				tsvechiclefeeService.saveOrUpdate(t);
 				systemService.addLog(message, Globals.Log_Type_UPDATE,
 						Globals.Log_Leavel_INFO);

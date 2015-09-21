@@ -291,7 +291,7 @@ public class TSConsumfeeController extends BaseController {
 		AjaxJson ajaxJson = new AjaxJson();
 		
 		String itemName = StringUtil.getEncodePra(req.getParameter("itemName"));
-		String sql = "select  distinct t.item_detail from t_s_consumfee t where t.item_name = '"+itemName+"'";
+		String sql = "select  distinct t.item_detail from t_s_consum_base t where t.item_name = '"+itemName+"'";
 		List<String> itemDetailList = this.systemService.findListbySql(sql);
 		
 		String options = "";
@@ -316,7 +316,7 @@ public class TSConsumfeeController extends BaseController {
 		
 		String itemDetail = StringUtil.getEncodePra(req.getParameter("itemDetail"));
 		String itemName = StringUtil.getEncodePra(req.getParameter("itemName"));
-		String sql = "select distinct t.standard from t_s_consumfee t where 1=1 ";
+		String sql = "select distinct t.standard from t_s_consum_base t where 1=1 ";
 		if(itemName!=null){
 			sql += " and t.item_name = '"+itemName+"'";
 		}
@@ -347,7 +347,7 @@ public class TSConsumfeeController extends BaseController {
 		String standard = StringUtil.getEncodePra(req.getParameter("standard"));
 		String itemDetail = StringUtil.getEncodePra(req.getParameter("itemDetail"));
 		String itemName = StringUtil.getEncodePra(req.getParameter("itemName"));
-		String sql = "select distinct t.supplier from t_s_consumfee t where 1=1 ";
+		String sql = "select distinct t.supplier from t_s_consum_base t where 1=1 ";
 		if(itemName!=null){
 			sql += " and t.item_name = '"+itemName+"'";
 		}
@@ -381,7 +381,7 @@ public class TSConsumfeeController extends BaseController {
 		String standard = StringUtil.getEncodePra(req.getParameter("standard"));
 		String itemDetail = StringUtil.getEncodePra(req.getParameter("itemDetail"));
 		String itemName = StringUtil.getEncodePra(req.getParameter("itemName"));
-		String sql = "select distinct t.price from t_s_consumfee t where 1=1 ";
+		String sql = "select distinct t.price from t_s_consum_base t where 1=1 ";
 		if(itemName!=null){
 			sql += " and t.item_name = '"+itemName+"'";
 		}
