@@ -68,9 +68,9 @@ public class TSDeliveryInfoController extends BaseController {
 	//初始化加载数据与查看页面请求数据
 	@RequestMapping(params = "datagrid")
 	public void datagrid(TSDeliverInfoEntity tsDeliveryInfo,HttpServletRequest request, HttpServletResponse response, DataGrid dataGrid) {
-	/*	if(StringUtil.isNotEmpty(tsproject.getProjectName())){
-			tsproject.setProjectName("*"+tsproject.getProjectName()+"*");
-			}*/
+		if(StringUtil.isNotEmpty(tsDeliveryInfo.getSendName())){
+			tsDeliveryInfo.setSendName("*"+tsDeliveryInfo.getSendName()+"*");
+			}
 		
 		CriteriaQuery cq = new CriteriaQuery(TSDeliverInfoEntity.class, dataGrid);
 		//查询条件组装器

@@ -21,6 +21,7 @@ public class TSUser extends TSBaseUser implements java.io.Serializable {
 	private String mobilePhone;// 手机
 	private String officePhone;// 办公电话
 	private String email;// 邮箱
+	//private String function; //员工职能
 	/**创建时间*/
 	private java.util.Date createDate;
 	/**创建人ID*/
@@ -164,4 +165,13 @@ public class TSUser extends TSBaseUser implements java.io.Serializable {
 	public void setUpdateName(java.lang.String updateName){
 		this.updateName = updateName;
 	}
+	/*@Column(name ="function",nullable=true,length=50)
+	public String getFunction() {
+		return function;
+	}
+
+	public void setFunction(String function) {
+		this.function = function;
+	}*/
+	
 }

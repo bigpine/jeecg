@@ -14,12 +14,14 @@ import org.jeecgframework.core.common.model.json.AjaxJson;
 import org.jeecgframework.core.common.model.json.DataGrid;
 import org.jeecgframework.core.constant.Globals;
 import org.jeecgframework.core.util.MyBeanUtils;
+import org.jeecgframework.core.util.ResourceUtil;
 import org.jeecgframework.core.util.StringUtil;
 import org.jeecgframework.core.util.oConvertUtils;
 import org.jeecgframework.tag.core.easyui.TagUtil;
 import org.jeecgframework.web.system.manager.ClientManager;
 import org.jeecgframework.web.system.pojo.base.TSDevprojectEntity;
 import org.jeecgframework.web.system.pojo.base.TSDevprojectFilesEntity;
+import org.jeecgframework.web.system.pojo.base.TSUser;
 import org.jeecgframework.web.system.service.SystemService;
 import org.jeecgframework.web.system.service.TSDevprojectServiceI;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,6 +91,8 @@ public class TSDevprojectController extends BaseController {
 		//查询条件组装器
 		org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq, tsdevproject, request.getParameterMap());
 	     this.tsdevprojectService.getDataGridReturn(cq, true);
+	     TSUser user = ResourceUtil.getSessionUserName();
+	     System.out.println(user+"测试数据值！");
 		TagUtil.datagrid(response, dataGrid);
 	}
 	/**

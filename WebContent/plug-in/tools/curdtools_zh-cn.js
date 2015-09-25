@@ -192,7 +192,7 @@ function editfs(title,url) {
 // 删除调用函数
 function delObj(url,name) {
 	gridname=name;
-	createdialog('删除确认 ', '确定删除该记录吗 ?', url,name);
+	createdialog('删除确认 ', '确定执行该记录吗 ?', url,name);
 }
 // 删除调用函数
 function confuploadify(url, id) {

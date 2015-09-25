@@ -75,6 +75,10 @@ public class TSBaseFeeController extends BaseController {
 		org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq, tsBaseFee, request.getParameterMap());
 		String markDateStart=request.getParameter("markDate_begin");
 		String markDateEnd = request.getParameter("markDate_end");
+		String feeName = tsBaseFee.getFeeName();
+		if(StringUtil.isNotEmpty(feeName)){
+			tsBaseFee.setFeeName("*"+tsBaseFee.getFeeName()+"*");
+		}
 		if(StringUtil.isNotEmpty(markDateStart)&&StringUtil.isNotEmpty(markDateEnd)){
 			try{
 				cq.ge("markDate", new SimpleDateFormat("yyyy-MM-dd").parse(markDateStart));
@@ -83,17 +87,20 @@ public class TSBaseFeeController extends BaseController {
 				e.printStackTrace();
 			}
 		}
+		
 		cq.add();
 	     this.systemService.getDataGridReturn(cq, true);
 	     String basefeeCount = null;
 	     
 	     if(StringUtil.isNotEmpty(markDateStart)&&StringUtil.isNotEmpty(markDateEnd)){
 	    	 basefeeCount = String.valueOf(tsbasefeeService.findOneForJdbc("select sum(amout) as ssum from t_s_basefee where mark_date >= "+"'"+markDateStart+"'"+ " and mark_date <="+"'"+markDateEnd+"'").get("ssum"));
-	       dataGrid.setFooter("amout:"+basefeeCount+"费用合计");
+	     
+	    	 dataGrid.setFooter("amout:"+(basefeeCount.equalsIgnoreCase("null")?"0.0":basefeeCount)+"费用合计");
 	       System.out.println(basefeeCount);
 	     }else{
 	    	 basefeeCount = String.valueOf(tsbasefeeService.findOneForJdbc("select sum(amout) as ssum from t_s_basefee").get("ssum"));
-	    	 dataGrid.setFooter("amout:"+basefeeCount+"费用合计");	    	
+	    	 
+	    	 dataGrid.setFooter("amout:"+(basefeeCount.equalsIgnoreCase("null")?"0.0":basefeeCount)+"费用合计");	    	
 	    	 System.out.println(basefeeCount);
 	     }
 	     

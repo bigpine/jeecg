@@ -109,7 +109,10 @@ public class TSFeeCountController extends BaseController {
 	    	("select sum (oil_fee)+sum(stop_fee)+sum(park_fee)+sum(etc_fee)+sum(wash_fee)+sum(service_fee) as ssum from t_s_vehiclefee").get("ssum"));
 	    	 consumfeeCount = String.valueOf(tsconsumfeeService.findOneForJdbc("select sum(amout) as ssum from t_s_consumfee").get("ssum"));
 
-	    	 dataGrid.setFooter("baseFeeCount:"+basefeeCount+","+"tranFeeCount:"+tranfeeCount+","+"vehicleFeeCount:"+vichfeeCount+","+"consumFeeCount:"+consumfeeCount);
+	    	 dataGrid.setFooter("baseFeeCount:"+(basefeeCount.equalsIgnoreCase("null")?"0.0":basefeeCount)+","
+	    			 +"tranFeeCount:"+(tranfeeCount.equalsIgnoreCase("null")?"0.0":tranfeeCount)+","
+	    			 +"vehicleFeeCount:"+(vichfeeCount.equalsIgnoreCase("null")?"0.0":vichfeeCount)+","
+	    			 +"consumFeeCount:"+(consumfeeCount.equalsIgnoreCase("null")?"0.0":consumfeeCount));
 	    	 System.out.println(basefeeCount+"基础费用"+tranfeeCount+"外地运输"+vichfeeCount+"市内运输"+consumfeeCount+"耗材");
 	     }
 		

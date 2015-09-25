@@ -56,9 +56,15 @@ public class TSConsumbaseController extends BaseController {
 	public void datagrid(TSConsumbaseEntity tsConsumbase,HttpServletRequest request, HttpServletResponse response, DataGrid dataGrid) {
 	
 		CriteriaQuery cq = new CriteriaQuery(TSConsumbaseEntity.class, dataGrid);
+		String itemName = tsConsumbase.getItemName();
+		if(StringUtil.isNotEmpty(itemName)){
+			tsConsumbase.setItemName("*"+tsConsumbase.getItemName()+"*");
+		}
+		
+		
 		//查询条件组装器
 		org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq, tsConsumbase, request.getParameterMap());
-	
+	   
 		cq.add();
 	     this.systemService.getDataGridReturn(cq, true);
 		TagUtil.datagrid(response, dataGrid);

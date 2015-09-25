@@ -11,6 +11,24 @@
 	if(location.href.indexOf("load=detail")!=-1){
 		$(".jeecgDetail").hide();
 	}
+	var level = $("#level1").val();
+	if(level != ''){
+		var isExist = false;
+		var count = $("#level").find("option").length;
+		for(var i=0; i<count; i++){
+			if($("#level").get(0).options[i].value == level){
+				isExist = true;
+				break;
+			}
+		}
+		if(!isExist){
+			$("#level").append("<option value='${tsDevprojectPage.level}'>${tsDevprojectPage.level}</option>");
+		}
+		$("#level").attr("value",'${tsDevprojectPage.level}');
+	}
+	
+    
+    
    });
 
   	function uploadFile(data){
@@ -41,6 +59,7 @@
 <body>
 <t:formvalid formid="formobj" dialog="true" usePlugin="password" layout="table" callback="@Override uploadFile" action="tsdevprojectController.do?save">
 	<input id="id" name="id" type="hidden" value="${tsDevprojectPage.id }">
+	 <input id="level1" name="level1" type="hidden" value="${tsDevprojectPage.carCode}">
 	 <input id="createName" name="createUser" type="hidden" value="${tsDevprojectPage.createName}">
     <input id="createDate" name="createTime" type="hidden" value="${tsDevprojectPage.createDate}">
     <input id="updateName" name="updateUser" type="hidden" value="${tsDevprojectPage.updateName}">
@@ -51,13 +70,17 @@
 		<tr>
 			<td align="right"><label class="Validform_label"> 项目名称: </label></td>
 			<td class="value"><input class="inputxt" id="devprojectName" name="devprojectName"  value="${tsDevprojectPage.devprojectName}"> <span class="Validform_checktip"></span></td>
+		
+		<td align="right"><label class="Validform_label"> 项目负责人: </label></td>
+			<td class="value"><input class="inputxt" id="devprojectManager" name="devprojectManager"  value="${tsDevprojectPage.devprojectManager}"> <span class="Validform_checktip"></span></td>
+		
 		</tr>
-		<tr>
+		<%-- <tr>
 			
 			<td align="right"><label class="Validform_label"> 项目负责人: </label></td>
 			<td class="value"><input class="inputxt" id="devprojectManager" name="devprojectManager"  value="${tsDevprojectPage.devprojectManager}"> <span class="Validform_checktip"></span></td>
 		
-		</tr>
+		</tr> --%>
 		<tr>
 			<td align="right"><label class="Validform_label"> 项目开始日期: </label></td>
 			<td class="value"><input class="Wdate" onClick="WdatePicker()" style="width: 150px" id="devprojectStartDate" name="devprojectStartDate" ignore="ignore"
@@ -69,6 +92,21 @@
 				value="<fmt:formatDate value='${tsDevprojectPage.devprojectEndDate}' type="date" pattern="yyyy-MM-dd"/>"> <span class="Validform_checktip"></span></td>
 			
 		</tr>
+		<tr>
+		
+		<td align="right"><label class="Validform_label">重要级别:</label></td>
+			
+	         <td class="value">
+	         <select  id="level" name="level" >
+             <option value="一般">一般</option>    
+             <option value="重要">重要</option> 			 
+             <option value="紧急">紧急</option>              
+             <option value="后期修改">后期修改</option>              
+            </select> 
+           </td>
+		
+		</tr>
+		
 	    <tr>
 	    <td align="right"><label class="Validform_label"> 项目状态:
 				</label></td>
@@ -140,7 +178,10 @@
 		<tr>
 				<td align="right"><label class="Validform_label"> 项目描述:
 				</label></td>
-				<td class="value"><textarea name="devprojectDesc" id="devprojectDesc" style="width:800px;height:300px;">${tsDevprojectPage.devprojectDesc}</textarea></td>
+				<td class="value"><textarea name="devprojectDesc" id="devprojectDesc" style="width:300px;height:300px;">${tsDevprojectPage.devprojectDesc}</textarea></td>
+				<td align="right"><label class="Validform_label"> 反馈意见:
+				</label></td>
+				<td class="value"><textarea name="feedback" id="feedback" style="width:300px;height:300px;">${tsDevprojectPage.feedback}</textarea></td>
 		</tr>
 	</table>
 </t:formvalid>

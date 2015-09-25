@@ -93,11 +93,11 @@ public class TSTransportFeeController extends BaseController {
 		if(StringUtil.isNotEmpty(sendDateStart)&&StringUtil.isNotEmpty(sendDateEnd)){
 			 tranfeeCount = String.valueOf(tstransportfeeService.
 		findOneForJdbc("select sum(amout) as ssum from t_s_transportfee where send_date >= "+"'"+sendDateStart+"'" +"and send_date <= "+"'"+sendDateEnd+"'").get("ssum"));
-			 dataGrid.setFooter("amout:"+tranfeeCount+"费用合计");
+			 dataGrid.setFooter("amout:"+(tranfeeCount.equalsIgnoreCase("null")?"0.0":tranfeeCount)+"费用合计");
 		}else{
 			 tranfeeCount = String.valueOf(tstransportfeeService.
 					findOneForJdbc("select sum(amout) as ssum from t_s_transportfee ").get("ssum"));
-			 dataGrid.setFooter("amout:"+tranfeeCount+"费用合计");
+			 dataGrid.setFooter("amout:"+(tranfeeCount.equalsIgnoreCase("null")?"0.0":tranfeeCount)+"费用合计");
 		}
 		  
 		TagUtil.datagrid(response, dataGrid);

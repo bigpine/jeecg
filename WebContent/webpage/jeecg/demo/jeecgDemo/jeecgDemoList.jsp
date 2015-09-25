@@ -35,7 +35,7 @@
 </div>
 <script type="text/javascript">
 	function testReloadPage(){
-		document.location = "http://www.baidu.com"; 
+		document.location = "http://www.runda-logistics.com"; 
 	}
 	function szqm(id) {
 		createwindow('审核', 'jeecgDemoController.do?doCheck&id=' + id);

@@ -43,15 +43,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
+
 @Scope("prototype")
 @Controller
 @RequestMapping("/tsconsumfeeController")
 // 耗材费用管理controller
 public class TSConsumfeeController extends BaseController {
-	
 
-	private static final Logger logger = Logger.getLogger(TSConsumfeeController.class);
-			
+	private static final Logger logger = Logger
+			.getLogger(TSConsumfeeController.class);
 
 	@Autowired
 	private TSConsumfeeServiceI tsconsumfeeService;
@@ -83,32 +83,42 @@ public class TSConsumfeeController extends BaseController {
 		// 查询条件组装器
 		org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq,
 				tsConsumFee, request.getParameterMap());
-		String markDateStart=request.getParameter("markDate_begin");
+		String markDateStart = request.getParameter("markDate_begin");
 		String markDateEnd = request.getParameter("markDate_end");
-		/*dataGrid.setFooter(footer);*/
-		if(StringUtil.isNotEmpty(markDateStart)&&StringUtil.isNotEmpty(markDateEnd)){
-			try{
-				cq.ge("markDate", new SimpleDateFormat("yyyy-MM-dd").parse(markDateStart));
-				cq.le("markDate", new SimpleDateFormat("yyyy-MM-dd").parse(markDateEnd));
-			}catch(ParseException e){
+		/* dataGrid.setFooter(footer); */
+		if (StringUtil.isNotEmpty(markDateStart)
+				&& StringUtil.isNotEmpty(markDateEnd)) {
+			try {
+				cq.ge("markDate",
+						new SimpleDateFormat("yyyy-MM-dd").parse(markDateStart));
+				cq.le("markDate",
+						new SimpleDateFormat("yyyy-MM-dd").parse(markDateEnd));
+			} catch (ParseException e) {
 				e.printStackTrace();
 			}
 		}
-		
+
 		cq.add();
 		this.systemService.getDataGridReturn(cq, true);
-		if(StringUtil.isNotEmpty(markDateStart)&&StringUtil.isNotEmpty(markDateEnd)){
-		String amoutCount =
-			String.valueOf(tsconsumfeeService.findOneForJdbc
-					("select sum(amout)as tt from t_s_consumfee where mark_date >=" +"'"+ markDateStart+"'" +" and mark_date <= "+ "'"+markDateEnd+"'").get("tt"));
-        dataGrid.setFooter("amout:"+amoutCount+"合计");
-        System.out.println(amoutCount+"合计的总值");
-		}else{
-			String amoutCount =
-				String.valueOf(tsconsumfeeService.findOneForJdbc
-						("select sum(amout)as tt from t_s_consumfee ").get("tt"));
-	        dataGrid.setFooter("amout:"+amoutCount+"费用合计");
-	        System.out.println(amoutCount+"合计的总值");
+		if (StringUtil.isNotEmpty(markDateStart)
+				&& StringUtil.isNotEmpty(markDateEnd)) {
+			String amoutCount = String.valueOf(tsconsumfeeService
+					.findOneForJdbc(
+							"select sum(amout)as tt from t_s_consumfee where mark_date >="
+									+ "'" + markDateStart + "'"
+									+ " and mark_date <= " + "'" + markDateEnd
+									+ "'").get("tt"));
+			
+			dataGrid.setFooter("amout:" + (amoutCount.equalsIgnoreCase("null")?"0.0": amoutCount)+ "合计");
+			System.out.println(amoutCount + "合计的总值");
+		} else {
+			String amoutCount = String.valueOf(tsconsumfeeService
+					.findOneForJdbc(
+							"select sum(amout)as tt from t_s_consumfee ").get(
+							"tt"));
+			
+			dataGrid.setFooter("amout:" + (amoutCount.equalsIgnoreCase("null")?"0.0": amoutCount) + "合计");
+			System.out.println(amoutCount + "合计的总值");
 		}
 		TagUtil.datagrid(response, dataGrid);
 	}
@@ -189,19 +199,20 @@ public class TSConsumfeeController extends BaseController {
 	public ModelAndView addorupdate(TSConsumfeeEntity tsConsumFee,
 			HttpServletRequest req) {
 		if (StringUtil.isNotEmpty(tsConsumFee.getId())) {
-			tsConsumFee = tsconsumfeeService.getEntity(
-					TSConsumfeeEntity.class, tsConsumFee.getId());
+			tsConsumFee = tsconsumfeeService.getEntity(TSConsumfeeEntity.class,
+					tsConsumFee.getId());
 			req.setAttribute("tsConsumFeePage", tsConsumFee);
 		}
 
-		List<TSConsumbaseEntity> consumbaseList = systemService.getList(TSConsumbaseEntity.class);
+		List<TSConsumbaseEntity> consumbaseList = systemService
+				.getList(TSConsumbaseEntity.class);
 		List<String> itemNameList = new ArrayList<String>();
 		for (TSConsumbaseEntity tsConsumbaseEntity : consumbaseList) {
-			if(!itemNameList.contains(tsConsumbaseEntity.getItemName())){
+			if (!itemNameList.contains(tsConsumbaseEntity.getItemName())) {
 				itemNameList.add(tsConsumbaseEntity.getItemName());
 			}
 		}
-		
+
 		req.setAttribute("itemNameList", itemNameList);
 		return new ModelAndView("system/feemanage/consumfeeInfo");
 
@@ -228,8 +239,7 @@ public class TSConsumfeeController extends BaseController {
 	public String exportXls(TSConsumfeeEntity tsConsumFee,
 			HttpServletRequest request, HttpServletResponse response,
 			DataGrid dataGrid, ModelMap modelMap) {
-		CriteriaQuery cq = new CriteriaQuery(TSConsumfeeEntity.class,
-				dataGrid);
+		CriteriaQuery cq = new CriteriaQuery(TSConsumfeeEntity.class, dataGrid);
 		org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq,
 				tsConsumFee, request.getParameterMap());
 		List<TSConsumfeeEntity> tsConsumFees = this.tsconsumfeeService
@@ -278,7 +288,7 @@ public class TSConsumfeeController extends BaseController {
 		}
 		return j;
 	}
-	
+
 	/**
 	 * AJAX 示例下拉框
 	 * 
@@ -287,21 +297,22 @@ public class TSConsumfeeController extends BaseController {
 	 */
 	@RequestMapping(params = "getItemDetailList")
 	@ResponseBody
-	public AjaxJson getItemDetailList(HttpServletRequest req){
+	public AjaxJson getItemDetailList(HttpServletRequest req) {
 		AjaxJson ajaxJson = new AjaxJson();
-		
+
 		String itemName = StringUtil.getEncodePra(req.getParameter("itemName"));
-		String sql = "select  distinct t.item_detail from t_s_consum_base t where t.item_name = '"+itemName+"'";
+		String sql = "select  distinct t.item_detail from t_s_consum_base t where t.item_name = '"
+				+ itemName + "'";
 		List<String> itemDetailList = this.systemService.findListbySql(sql);
-		
+
 		String options = "";
 		for (String itemDetail : itemDetailList) {
-			options += "<option value=\""+itemDetail+"\" >"+itemDetail+"</option>";
+			options += "<option value=\"" + itemDetail + "\" >" + itemDetail
+					+ "</option>";
 		}
 		ajaxJson.setMsg(options);
 		return ajaxJson;
 	}
-	
 
 	/**
 	 * AJAX 示例下拉框
@@ -311,28 +322,29 @@ public class TSConsumfeeController extends BaseController {
 	 */
 	@RequestMapping(params = "getStandardList")
 	@ResponseBody
-	public AjaxJson getStandardList(HttpServletRequest req){
+	public AjaxJson getStandardList(HttpServletRequest req) {
 		AjaxJson ajaxJson = new AjaxJson();
-		
-		String itemDetail = StringUtil.getEncodePra(req.getParameter("itemDetail"));
+
+		String itemDetail = StringUtil.getEncodePra(req
+				.getParameter("itemDetail"));
 		String itemName = StringUtil.getEncodePra(req.getParameter("itemName"));
 		String sql = "select distinct t.standard from t_s_consum_base t where 1=1 ";
-		if(itemName!=null){
-			sql += " and t.item_name = '"+itemName+"'";
+		if (itemName != null) {
+			sql += " and t.item_name = '" + itemName + "'";
 		}
-		if(itemDetail!=null){
-			sql += " and t.item_detail = '"+itemDetail+"'";
+		if (itemDetail != null) {
+			sql += " and t.item_detail = '" + itemDetail + "'";
 		}
 		List<String> standardList = this.systemService.findListbySql(sql);
-		
+
 		String options = "";
 		for (String standard : standardList) {
-			options += "<option value=\""+standard+"\">"+standard+"</option>";
+			options += "<option value=\"" + standard + "\">" + standard
+					+ "</option>";
 		}
 		ajaxJson.setMsg(options);
 		return ajaxJson;
 	}
-
 
 	/**
 	 * AJAX 示例下拉框
@@ -342,26 +354,28 @@ public class TSConsumfeeController extends BaseController {
 	 */
 	@RequestMapping(params = "getSupplierList")
 	@ResponseBody
-	public AjaxJson getSupplierList(HttpServletRequest req){
+	public AjaxJson getSupplierList(HttpServletRequest req) {
 		AjaxJson ajaxJson = new AjaxJson();
 		String standard = StringUtil.getEncodePra(req.getParameter("standard"));
-		String itemDetail = StringUtil.getEncodePra(req.getParameter("itemDetail"));
+		String itemDetail = StringUtil.getEncodePra(req
+				.getParameter("itemDetail"));
 		String itemName = StringUtil.getEncodePra(req.getParameter("itemName"));
 		String sql = "select distinct t.supplier from t_s_consum_base t where 1=1 ";
-		if(itemName!=null){
-			sql += " and t.item_name = '"+itemName+"'";
+		if (itemName != null) {
+			sql += " and t.item_name = '" + itemName + "'";
 		}
-		if(itemDetail!=null){
-			sql += " and t.item_detail = '"+itemDetail+"'";
+		if (itemDetail != null) {
+			sql += " and t.item_detail = '" + itemDetail + "'";
 		}
-		if(standard!=null){
-			sql += " and t.standard = '"+standard+"'";
+		if (standard != null) {
+			sql += " and t.standard = '" + standard + "'";
 		}
 		List<String> supplierList = this.systemService.findListbySql(sql);
-		
+
 		String options = "";
 		for (String supplier : supplierList) {
-			options += "<option value=\""+supplier+"\">"+supplier+"</option>";
+			options += "<option value=\"" + supplier + "\">" + supplier
+					+ "</option>";
 		}
 		ajaxJson.setMsg(options);
 		return ajaxJson;
@@ -375,30 +389,32 @@ public class TSConsumfeeController extends BaseController {
 	 */
 	@RequestMapping(params = "getPriceList")
 	@ResponseBody
-	public AjaxJson getPriceList(HttpServletRequest req){
+	public AjaxJson getPriceList(HttpServletRequest req) {
 		AjaxJson ajaxJson = new AjaxJson();
 		String supplier = StringUtil.getEncodePra(req.getParameter("supplier"));
 		String standard = StringUtil.getEncodePra(req.getParameter("standard"));
-		String itemDetail = StringUtil.getEncodePra(req.getParameter("itemDetail"));
+		String itemDetail = StringUtil.getEncodePra(req
+				.getParameter("itemDetail"));
 		String itemName = StringUtil.getEncodePra(req.getParameter("itemName"));
 		String sql = "select distinct t.price from t_s_consum_base t where 1=1 ";
-		if(itemName!=null){
-			sql += " and t.item_name = '"+itemName+"'";
+		if (itemName != null) {
+			sql += " and t.item_name = '" + itemName + "'";
 		}
-		if(itemDetail!=null){
-			sql += " and t.item_detail = '"+itemDetail+"'";
+		if (itemDetail != null) {
+			sql += " and t.item_detail = '" + itemDetail + "'";
 		}
-		if(standard!=null){
-			sql += " and t.standard = '"+standard+"'";
+		if (standard != null) {
+			sql += " and t.standard = '" + standard + "'";
 		}
-		if(supplier!=null){
-			sql += " and t.supplier = '"+supplier+"'";
+		if (supplier != null) {
+			sql += " and t.supplier = '" + supplier + "'";
 		}
 		List<Double> priceList = this.systemService.findListbySql(sql);
-		
+
 		String options = "";
 		for (Double price : priceList) {
-			options += "<option value=\""+price.toString()+"\">"+price.toString()+"</option>";
+			options += "<option value=\"" + price.toString() + "\">"
+					+ price.toString() + "</option>";
 		}
 		ajaxJson.setMsg(options);
 		return ajaxJson;

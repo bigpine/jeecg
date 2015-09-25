@@ -7,10 +7,12 @@
 	<t:dgCol title="编号" field="id" hidden="true"></t:dgCol>
 	<t:dgCol title="项目名称" field="devprojectName" query="true"></t:dgCol>
 	<t:dgCol title="项目负责人" field="devprojectManager"></t:dgCol>
-	<t:dgCol title="项目开始日期" field="devprojectStartDate"  formatter="yyyy-MM-dd" query="true" width="250" ></t:dgCol>
-	<t:dgCol title="项目结束日期" field="devprojectEndDate"  formatter="yyyy-MM-dd" query="true" width="250"></t:dgCol>
+	<t:dgCol title="项目开始日期" field="devprojectStartDate"  formatter="yyyy-MM-dd" query="true" ></t:dgCol>
+	<t:dgCol title="项目结束日期" field="devprojectEndDate"  formatter="yyyy-MM-dd" query="true" ></t:dgCol>
+	<t:dgCol title="计划完成日期" field="planCompleteDate"  formatter="yyyy-MM-dd" query="true" ></t:dgCol>
 	<t:dgCol title="项目状态" field="devprojectStatus" query="true" dictionary ="pro_status"></t:dgCol>
-	<t:dgCol title="项目描述" field="devprojectDesc"></t:dgCol>
+	<t:dgCol title="项目描述" field="devprojectDesc" hidden="true"></t:dgCol>
+	<t:dgCol title="反馈意见" field="feedback" hidden="true"></t:dgCol>
 	<t:dgCol title="创建人" field="createName"></t:dgCol>
 	<t:dgCol title="创建时间" field="createDate" formatter="yyyy-MM-dd hh:mm:ss" ></t:dgCol>
 	<t:dgCol title="修改人" field="updateName"></t:dgCol>
@@ -20,6 +22,8 @@
 	<t:dgToolBar title="录入" icon="icon-add" url="tsdevprojectController.do?addorupdate" funname="add" width="100%" height="100%"></t:dgToolBar>
 	<t:dgToolBar title="编辑" icon="icon-edit" url="tsdevprojectController.do?addorupdate" funname="update" width="100%" height="100%"></t:dgToolBar>
 	<t:dgToolBar title="查看" icon="icon-search" url="tsdevprojectController.do?addorupdate" funname="detail" width="100%" height="100%"></t:dgToolBar>
+	<t:dgToolBar title="删除" icon="icon-delete" url="" funname="detail" width="100%" height="100%"></t:dgToolBar>
+
 </t:datagrid>
 </div>
 </div>

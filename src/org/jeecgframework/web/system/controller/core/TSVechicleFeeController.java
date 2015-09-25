@@ -102,14 +102,14 @@ public class TSVechicleFeeController extends BaseController {
 		  if(StringUtil.isNotEmpty(markDateStart)&&StringUtil.isNotEmpty(markDateEnd)){
 		    	 vichfeeCount = String.valueOf(tsvechiclefeeService.findOneForJdbc
 		    	("select sum (oil_fee)+sum(stop_fee)+sum(park_fee)+sum(etc_fee)+sum(wash_fee)+sum(service_fee) as ssum from t_s_vehiclefee  where send_date >= "+"'"+markDateStart+"'"+ " and send_date <="+"'"+markDateEnd+"'").get("ssum"));
-		    	 dataGrid.setFooter("amout:"+vichfeeCount);
+		    	 dataGrid.setFooter("amout:"+(vichfeeCount.equalsIgnoreCase("null")?"0.0":vichfeeCount));
 		       
 		         System.out.println(vichfeeCount+"市内运输");	   
 		         }else{
 		    	 vichfeeCount = String.valueOf(tsvechiclefeeService.findOneForJdbc
 		    	("select sum (oil_fee)+sum(stop_fee)+sum(park_fee)+sum(etc_fee)+sum(wash_fee)+sum(service_fee) as ssum from t_s_vehiclefee").get("ssum"));
 
-		    	 dataGrid.setFooter("amout:"+vichfeeCount);
+		    	 dataGrid.setFooter("amout:"+(vichfeeCount.equalsIgnoreCase("null")?"0.0":vichfeeCount));
 		    	 System.out.println(vichfeeCount+"市内运输");	 
 		     }
 

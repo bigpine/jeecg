@@ -146,52 +146,7 @@
 	function close() {
 		frameElement.api.close();
 	}
-	/* 
-	//泡沫箱
-	var city1 = ["2泡沫箱","4泡沫箱","6泡沫箱","8泡沫箱","9泡沫箱","BV-E48H包装箱110L","BV-E48H包装箱43L","BV-E48H包装箱10L"]; 
-	//泡沫平板
-	var city2 = ["1泡沫平板1","1泡沫平板2","2泡沫平板1","2泡沫平板2","2泡沫平板3","4泡沫平板1","4泡沫平板2","4泡沫平板3","5泡沫平板1","5泡沫平板2","5泡沫平板3","7泡沫平板1","7泡沫平板2","7泡沫平板3","泡沫平板1","泡沫平板2"]; 
-	//纸箱
-	var city3 = ["1纸箱","2纸箱","3纸箱","4纸箱","5纸箱","6纸箱","7纸箱","8纸箱","9纸箱","#纸箱","定标包装盒"]; 
-	//冰
-	var city4 = ["冰袋","冰袋20L","冰袋20S","干冰","包冰布"]; 
-	//托盘
-	var city5 = ["托盘"];
-	//发票袋
-	var city6 = ["得力5521拉链袋"];
-	//其他
-	var city7 = ["机制打包带","手工打包带","打包扣","纸护角","纤维棉","缠绕膜","气泡垫","缓冲气垫","封箱带","印字封箱带","1号印字封箱带","牛皮纸","润达发货单","康祥发货单","SAP发货单","内包装高压袋1(5号箱)","内包装高压袋2(4号箱)","内包装高压袋3"];
-	//标签
-	var city8 = ["标签","防水标签","标签纸"];
-	//碳带
-	var city9 = ["碳带","色带"]; */
-
-
-	//科目
-	/* var provinceName = ["泡沫箱","泡沫平板","纸箱","冰","托盘","发票袋","其他","标签","碳带"];
-
-
-	function province() 
-	{
-
-	    var e = document.form1.province; 
-	    for (var i=0; i<provinceName.length; i++) 
-	       e.options.add(new Option(provinceName[i], provinceName[i])); 
-	} 
-	function cityName(n) 
-	{ 
-	    var e = document.form1.city; 
-	    for (var i=e.options.length; i>0; i--)  e.remove(i); 
-	    if (n == 0) return; 
-	    var a = eval("city"+ n); //得到明细的数组名 
-	    for (var i=0; i<a.length; i++) e.options.add(new Option(a[i], a[i])); 
-	} 
-	function onload() 
-	{ 
-	    province(); //初始时给科目下拉菜单赋内容 
-	} 
-
-	 */
+	
 
 </script>
 <!-- 弹出页面窗口大小控制 -->

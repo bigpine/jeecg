@@ -7,7 +7,7 @@
 	<t:dgCol title="主键" field="id" hidden="true"></t:dgCol>
 	<t:dgCol title="公司" field="company" ></t:dgCol>
 	<t:dgCol title="送达方" field="sendCode"></t:dgCol>
-	<t:dgCol title="送达方名称" field="sendName"></t:dgCol>
+	<t:dgCol title="送达方名称" field="sendName" query="true"></t:dgCol>
 	<t:dgCol title="售达方" field="saleCode" ></t:dgCol>
 	<t:dgCol title="售达方名称" field="saleName" ></t:dgCol>
 	<t:dgCol title="发货单类型" field="fhdType" query="true" dictionary ="fhd_type"></t:dgCol>

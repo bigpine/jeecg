@@ -53,6 +53,13 @@ public class TSDevprojectEntity implements Serializable {
 	/** 更新日期 */
 	private Date updateDate;
 	
+	private String level;//重要级别
+	
+	private String subStatus;//用户提交状态
+	
+	private String feedback;//责任人反馈意见
+	
+	private Date planCompleteDate; //计划完成日期
 	private List<TSDevprojectFilesEntity> devprojectFiles;
 
 	/**
@@ -240,4 +247,38 @@ public class TSDevprojectEntity implements Serializable {
 	public void setDevprojectFiles(List<TSDevprojectFilesEntity> devprojectFiles) {
 		this.devprojectFiles = devprojectFiles;
 	}
+	@Column(name ="LEVEL",nullable=true)
+	public String getLevel() {
+		return level;
+	}
+
+	public void setLevel(String level) {
+		this.level = level;
+	}
+	@Column(name ="SUB_STATUS",nullable=true)
+	public String getSubStatus() {
+		return subStatus;
+	}
+
+	public void setSubStatus(String subStatus) {
+		this.subStatus = subStatus;
+	}
+	@Column(name ="FEED_BACK",nullable=true)
+	public String getFeedback() {
+		return feedback;
+	}
+
+	public void setFeedback(String feedback) {
+		this.feedback = feedback;
+	}
+	@Column(name ="PLAN_COMPLETE_DATE",nullable=true)
+	public Date getPlanCompleteDate() {
+		return planCompleteDate;
+	}
+
+	public void setPlanCompleteDate(Date planCompleteDate) {
+		this.planCompleteDate = planCompleteDate;
+	}
+	
+	
 }

@@ -31,7 +31,9 @@ public class ObjectParseUtil {
 			cq.le(name, value);
 			break;
 		case EQ:
-			cq.eq(name, value);
+			//cq.eq(name, value);
+			cq.like(name,HqlParseEnum.SUFFIX_ASTERISK_VAGUE.getValue()+value+
+					HqlParseEnum.SUFFIX_ASTERISK_VAGUE.getValue());
 			break;
 		case NE:
 			cq.notEq(name, value);
